@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class StateBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public virtual void OnStateEnter(Object o = null)
     {
-        
+        //Debug.Log("Enter State: " + this.name);
+    } 
+
+    public virtual void OnStateStay()
+    {
+        //Debug.Log("Stay in State: " + this.name);
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void OnStateExit()
     {
-        
+        //Debug.Log("Exit State: " + this.name);
     }
 }
