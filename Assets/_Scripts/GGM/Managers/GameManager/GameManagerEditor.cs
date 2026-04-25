@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using GGM.FSM;
 
-[CustomEditor(typeof(FSM_exemple))]
-public class StateMachineEditor : Editor
+[CustomEditor(typeof(GameManager))]
+public class GameManagerEditor : Editor
 {
     public bool showFoldout;
 
@@ -13,27 +14,27 @@ public class StateMachineEditor : Editor
     {
         base.OnInspectorGUI();
 
-        FSM_exemple fsm = (FSM_exemple)target;
+        GameManager gameManager = (GameManager)target;
 
         EditorGUILayout.Space(30);
         EditorGUILayout.LabelField("State Machine");
 
-        if(fsm.stateMachine == null)
+        if(gameManager.stateMachine == null)
         {
             EditorGUILayout.HelpBox("State Machine is null", MessageType.Warning);
             return;
         }
 
-        if(fsm.stateMachine.CurrentState != null) EditorGUILayout.LabelField("Current State : " + fsm.stateMachine.CurrentState.ToString());
+        if(gameManager.stateMachine.CurrentState != null) EditorGUILayout.LabelField("Current State : " + gameManager.stateMachine.CurrentState.ToString());
         
         showFoldout = EditorGUILayout.Foldout(showFoldout, "Available States");
 
         if(showFoldout)
         {
-            if(fsm.stateMachine.dictionaryState != null)
+            if(gameManager.stateMachine.dictionaryState != null)
             {                
-                var keys = fsm.stateMachine.dictionaryState.Keys.ToArray();
-                var vals = fsm.stateMachine.dictionaryState.Values.ToArray();
+                var keys = gameManager.stateMachine.dictionaryState.Keys.ToArray();
+                var vals = gameManager.stateMachine.dictionaryState.Values.ToArray();
 
                 for(int i = 0; i < keys.Length; i++)
                 {
@@ -44,7 +45,7 @@ public class StateMachineEditor : Editor
 
         if (GUILayout.Button("Switch State IDLE"))
         {
-            fsm.stateMachine.SwitchState(FSM_exemple.EnumStates.IDLE);
+            gameManager.stateMachine.SwitchState(GameManager.GameStates.INTRO);
         }
     }
 }

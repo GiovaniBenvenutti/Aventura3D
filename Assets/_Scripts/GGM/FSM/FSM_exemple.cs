@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GGM.FSM;
 
 public class FSM_exemple : MonoBehaviour
 {
-    public enum States
+    public enum EnumStates
     {
         NONE,
         IDLE,
@@ -12,17 +13,21 @@ public class FSM_exemple : MonoBehaviour
         JUMPING
     }
 
-    public StateMachine<States> _stateMachine;
+    public StateMachine<EnumStates> stateMachine;
     // Start is called before the first frame update
     void Start()
     {
-        _stateMachine = new StateMachine<States>();
-        _stateMachine.Init();
+        stateMachine = new StateMachine<EnumStates>(/*EnumStates.IDLE*/);
+        stateMachine.Init();
+        stateMachine.RegisterStates(EnumStates.IDLE, new StateBase());
+        stateMachine.RegisterStates(EnumStates.RUNNING, new StateBase());
+        stateMachine.RegisterStates(EnumStates.JUMPING, new StateBase());
+        stateMachine.SwitchState(EnumStates.IDLE);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        stateMachine.Update();
     }
 }
