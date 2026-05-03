@@ -53,5 +53,10 @@
         "temp/":true,
         "Temp/":true
     },
-    "dotnet.preferCSharpExtension": true
+    "dotnet.preferCSharpExtension": true,
+    "git.enabled": true,
+    "git.autorefresh": true,
+    "git.decorations.enabled": true,
+    "git.autoRepositoryDetection": true,
+    "scm.alwaysShowProviders": true
 }
