@@ -10,14 +10,14 @@ public class PowerUpCoins : PowerUpBase
     protected override void StartPowerUp()
     {
         base.StartPowerUp();
-        PlayerController.Instance.ChangeCoinCollectorSize(sizeAmount);
+        PlayerControllerCasualGame.Instance.ChangeCoinCollectorSize(sizeAmount);
         //PlayerController.Instance.SetPowerUpText("Invencible");
     }
 
     protected override void EndPowerUp()
     {
         base.EndPowerUp();
-        PlayerController.Instance.ChangeCoinCollectorSize(1f); // resetar para o tamanho original
+        PlayerControllerCasualGame.Instance.ChangeCoinCollectorSize(1f); // resetar para o tamanho original
         //PlayerController.Instance.SetPowerUpText("");
     }
 }

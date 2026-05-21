@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Player_Run_State : PlayerBaseState
 {  
-    private SimplePlayerControler spc;
+    private Player spc;
     private Animator animator;
 
     void Awake()
     {
-        spc = GetComponent<SimplePlayerControler>();
+        spc = GetComponent<Player>();
         animator = spc.animator; // usa o animator do controler para garantir consistência
     }
 

@@ -5,11 +5,11 @@ using UnityEngine;
 public class Player_Die_State : PlayerBaseState
 {
     private Animator animator;
-    private SimplePlayerControler spc;
+    private Player spc;
 
     void Awake()
     {
-        spc = GetComponent<SimplePlayerControler>();
+        spc = GetComponent<Player>();
         animator = spc.animator; // usa o animator do controler para garantir consistência
     }
 

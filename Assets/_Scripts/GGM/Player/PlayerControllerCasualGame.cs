@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using GGM.Singleton;
 
-public class PlayerController : Singleton<PlayerController>
+public class PlayerControllerCasualGame : Singleton<PlayerControllerCasualGame>
 {
     //  public variables
     public LevelManager levelManager;

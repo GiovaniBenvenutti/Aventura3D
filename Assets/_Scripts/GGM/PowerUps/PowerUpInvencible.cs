@@ -10,14 +10,14 @@ public class PowerUpInvencible : PowerUpBase
     protected override void StartPowerUp()
     {
         base.StartPowerUp();
-        PlayerController.Instance.SetInvencible();
-        PlayerController.Instance.SetPowerUpText("Invencible");
+        PlayerControllerCasualGame.Instance.SetInvencible();
+        PlayerControllerCasualGame.Instance.SetPowerUpText("Invencible");
     }
 
     protected override void EndPowerUp()
     {
         base.EndPowerUp();
-        PlayerController.Instance.SetInvencible(false);
-        PlayerController.Instance.SetPowerUpText("");
+        PlayerControllerCasualGame.Instance.SetInvencible(false);
+        PlayerControllerCasualGame.Instance.SetPowerUpText("");
     }
 }

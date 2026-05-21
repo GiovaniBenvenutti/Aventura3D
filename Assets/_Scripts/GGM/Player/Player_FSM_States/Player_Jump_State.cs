@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player_Jump_State : PlayerBaseState
 {
-    public SimplePlayerControler spc;
+    public Player spc;
 
     void Awake()
     {
-        spc = GetComponent<SimplePlayerControler>();
+        spc = GetComponent<Player>();
     }
 
 

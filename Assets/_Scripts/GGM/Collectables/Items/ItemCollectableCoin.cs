@@ -19,7 +19,7 @@ public class ItemCollectableCoin : ItemCollectableBase
         base.OnCollect();
         collider.enabled = false;
         isCollected = true;
-        PlayerController.Instance.Bounce();
+        PlayerControllerCasualGame.Instance.Bounce();
     }
 
     protected override void Collect()
@@ -32,7 +32,7 @@ public class ItemCollectableCoin : ItemCollectableBase
         if (isCollected)
         {
 
-            Vector3 playerPosition = PlayerController.Instance.transform.position;
+            Vector3 playerPosition = PlayerControllerCasualGame.Instance.transform.position;
             transform.position = Vector3.Lerp(transform.position, playerPosition, lerp * Time.deltaTime);
 
             if(Vector3.Distance(transform.position, playerPosition) < minDistance)
