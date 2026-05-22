@@ -13,7 +13,7 @@ public class GunBase3D : MonoBehaviour
 
     private Coroutine _currentCoroutine;
 
-    private IEnumerator ShootCoroutine()
+    protected virtual IEnumerator ShootCoroutine()
     {
         while(true)
         {
@@ -21,8 +21,8 @@ public class GunBase3D : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenShoot);
         }
     }
-
-    private void Shoot()
+    
+    public void Shoot()
     {
         var projectile = Instantiate(prefabProjectile);
         projectile.transform.position = positionToShoot.position;
