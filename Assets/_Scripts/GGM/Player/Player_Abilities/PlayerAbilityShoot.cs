@@ -6,16 +6,29 @@ using UnityEngine.InputSystem;
 public class PlayerAbilityShoot : PlayerAbilityBase
 {
     public GunBase3D gunBase;
+    public Transform gunPosition;
+    private GunBase3D _currentGun;
+
     protected override void Init()
     {
         base.Init();
+        createGun();
         inputs.GamePlay.shoot.performed += ctx => StartShoot();
         inputs.GamePlay.shoot.canceled += ctx => CancelShoot();
+    }
+
+    private void createGun()
+    {
+        if (_currentGun != null) Destroy(_currentGun.gameObject);
+
+        _currentGun = Instantiate(gunBase, gunPosition);
+        _currentGun.transform.localPosition = _currentGun.transform.localEulerAngles = Vector3.zero;
+        
     }
     
     private void StartShoot()
     {
-        gunBase.StartShoot();
+        _currentGun.StartShoot();
         //if (playerController.IsDead) return;
 
         // Implement shooting logic here
@@ -28,6 +41,6 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
         // Implement shooting logic here
         Debug.Log("Player cancels shoot!");
-        gunBase.StopShoot();
+        _currentGun.StopShoot();
     }
 }
