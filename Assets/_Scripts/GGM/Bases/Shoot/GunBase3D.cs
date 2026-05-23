@@ -7,7 +7,7 @@ public class GunBase3D : MonoBehaviour
     public ProjectileBase3D prefabProjectile;
 
     public Transform positionToShoot;
-    public float timeBetweenShoot = 0.3f;
+    public float timeBetweenShoot = 0.2f;
     public float speed = 50f;
 
     //public KeyCode keyToShoot = KeyCode.Z;

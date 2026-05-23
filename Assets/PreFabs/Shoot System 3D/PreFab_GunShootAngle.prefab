@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1750929076472270206}
   - component: {fileID: 1902578937078886864}
   m_Layer: 0
-  m_Name: Prefab_GunShootAngle
+  m_Name: PreFab_GunShootAngle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,10 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabProjectile: {fileID: 9016670752627664034, guid: e831e1ede0659984ebfcab385d0763a0, type: 3}
   positionToShoot: {fileID: 4998146967704723941}
-  timeBetweenShoot: 0.3
-  speed: 50
+  timeBetweenShoot: 0.75
+  speed: 30
+  uiGunUpdaters: []
   maxShoot: 5
-  timeToRecharge: 1
+  timeToRecharge: 1.5
   amountPerShoot: 4
   angle: 15
 --- !u!1 &8786308349668949274

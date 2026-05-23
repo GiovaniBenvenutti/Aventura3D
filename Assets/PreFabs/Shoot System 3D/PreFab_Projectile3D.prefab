@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2834069141819634722}
   - component: {fileID: 9016670752627664034}
   m_Layer: 0
-  m_Name: PreFab_Projectile
+  m_Name: PreFab_Projectile3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7b27c0cf888c448a8076bb9446dc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDestroy: 2
+  timeToDestroy: 1
   damageAmount: 1
-  speed: 50
+  speed: 75
 --- !u!1 &8198427425595142000
 GameObject:
   m_ObjectHideFlags: 0
