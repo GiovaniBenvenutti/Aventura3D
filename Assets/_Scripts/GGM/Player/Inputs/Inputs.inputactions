@@ -12,6 +12,30 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "changeGun1",
+                    "type": "Button",
+                    "id": "a1949eb9-d32f-4928-9726-24ce3cedfc69",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "changeGun2",
+                    "type": "Button",
+                    "id": "503481fc-463b-4aaf-b1f5-237b0b787c3b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "changeGun3",
+                    "type": "Button",
+                    "id": "d11f89a8-7ba2-4040-8d69-47288e1d0dcd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -23,6 +47,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8314477e-dfdf-45a0-a2a9-c11f04ca3c76",
+                    "path": "<Keyboard>/1",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "changeGun1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bab7d4ca-bed8-497c-a340-b9aeef5ccae3",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "changeGun2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d9e7089-0130-4fab-91c9-502be3bfcfad",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "changeGun3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
