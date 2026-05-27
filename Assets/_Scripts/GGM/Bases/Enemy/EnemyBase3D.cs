@@ -1,13 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using GGM.Animation;
 
 namespace Enemy
 {
-    public class EnemyBase3D : MonoBehaviour
+    public class EnemyBase3D : MonoBehaviour, IDamageable
     {
+        public Collider collider;
         public float startLife = 10f;
         [SerializeField] private float _currentLife;
+        
+        [Header("Animation")]
+        [SerializeField] private AnimationBase _animationBase;
+
+        [Header("Start Animation")]
+        public float startAnimationDuration = 0.5f;
+        public Ease startAnimationEase = Ease.OutBack;
+        public bool startWithBornAnimation = true;
 
         private void Awake()
         {
@@ -22,6 +33,7 @@ namespace Enemy
         protected virtual void Init()
         {
             ResetLife();
+            if(startWithBornAnimation) BornAnimation();
         }
 
         protected virtual void Kill()
@@ -31,7 +43,9 @@ namespace Enemy
 
         protected virtual void OnKill()
         {
-            Destroy(gameObject);
+            if (collider != null) collider.enabled = false;
+            Destroy(gameObject, 3f);
+            playAnimationByTrigger(AnimationType.DEATH);
 
         }
 
@@ -44,6 +58,24 @@ namespace Enemy
             }
         }
 
+        #region Animation
+        private void BornAnimation()
+        {
+            transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
+        }
+
+        public void playAnimationByTrigger(AnimationType animationType)
+        {
+            if(_animationBase != null)
+            {
+                _animationBase.PlayAnimationByTrigger(animationType);
+            }
+        }
+
+        #endregion
+
+
+
         #region Debug
         private void Update()
         {
@@ -52,64 +84,12 @@ namespace Enemy
                 OnDamage(5f);
             }
         }
-
         #endregion
 
+        public void Damage(float damage)
+        {
+            OnDamage(damage);
+        }
 
-
-
-        // public int damage = 1;
-
-        // public Animator animator;
-        // public string triggerAttack = "Attack";
-        // public string triggerDeath = "Death";
-        // public HealthBase healthBase;
-
-        // public AudioSource onKillSound;
-
-
-        // // void Awake()
-        // // {
-        // //     //_healthBase = GetComponent<HealthBase>();
-
-        // //     if(healthBase != null)
-        // //     {
-        // //         healthBase.OnKill += OnEnemyKill;
-        // //     }
-        // // }
-
-        // private void OnEnemyKill()
-        // {
-        //     healthBase.OnKill -= OnEnemyKill;
-        //     if (onKillSound != null) onKillSound.Play();
-        //     PlayDeathAnimation();
-        // }
-
-        // private void OnCollisionEnter2D(Collision2D collision)
-        // {
-        //     var health = collision.gameObject.GetComponent<HealthBase>();
-
-        //     if(health != null)
-        //     {
-        //         health.Damage(damage);
-        //         PlayAttackAnimation();
-        //     }
-        // }
-
-        // private void PlayAttackAnimation()
-        // {
-        //     if(animator != null)
-        //     {
-        //         animator.SetTrigger(triggerAttack);
-        //     }
-        // }
-
-        // private void PlayDeathAnimation()
-        // {
-        //     if(animator != null)
-        //     {
-        //         animator.SetTrigger(triggerDeath);
-        //     }
-        // }
     }
 }

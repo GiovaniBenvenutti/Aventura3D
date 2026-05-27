@@ -20,11 +20,12 @@ public class ProjectileBase3D : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // var health = collision.gameObject.GetComponent<HealthBase3D>();
-        // if(health != null)
-        // {
-        //     health.TakeDamage(damageAmount);
-        // }
+        Debug.Log($"Projectile collided with {collision.gameObject.name}");
+        var damageable = collision.transform.GetComponent<IDamageable>();
+
+        if (damageable != null) damageable.Damage(damageAmount);
+        
+        Destroy(gameObject);
     }
 
 }
