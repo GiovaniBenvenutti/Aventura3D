@@ -11,6 +11,7 @@ public class GunShootAngle : GunShootLimit
     {
         var projectile1 = Instantiate(prefabProjectile, positionToShoot);
         projectile1.transform.localPosition = Vector3.zero;
+        projectile1.GetComponentInChildren<MeshRenderer>().material.SetColor("_Color", projectileColor);
         projectile1.speed = speed;
         projectile1.transform.parent = null;
 
@@ -23,6 +24,8 @@ public class GunShootAngle : GunShootLimit
 
             projectile.transform.localPosition = Vector3.zero;
             projectile.transform.localEulerAngles = Vector3.zero + Vector3.up * (i%2 == 0 ? angle : -angle) * mult;
+            projectile.GetComponentInChildren<MeshRenderer>().material.SetColor("_Color", projectileColor);
+
 
             projectile.speed = speed;
             projectile.transform.parent = null;

@@ -47,10 +47,13 @@ MonoBehaviour:
   prefabProjectile: {fileID: 9016670752627664034, guid: e831e1ede0659984ebfcab385d0763a0, type: 3}
   positionToShoot: {fileID: 3312172141651842506}
   timeBetweenShoot: 2
-  speed: 100
+  speed: 30
+  projectileSize: 1.5
+  projectileDamage: 4
+  projectileColor: {r: 0.78898424, g: 0.4494482, b: 0.9433962, a: 1}
   uiGunUpdaters: []
   maxShoot: 5
-  timeToRecharge: 3
+  timeToRecharge: 2
 --- !u!1 &4909518132538641528
 GameObject:
   m_ObjectHideFlags: 0

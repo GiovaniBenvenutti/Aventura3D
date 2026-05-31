@@ -20,12 +20,15 @@ public class ProjectileBase3D : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"Projectile collided with {collision.gameObject.name}");
-        var damageable = collision.transform.GetComponent<IDamageable>();
+        if (!collision.gameObject.GetComponent<ProjectileBase3D>())
+        {
+            Debug.Log($"Projectile collided with {collision.gameObject.name}");
+            var damageable = collision.transform.GetComponent<IDamageable>();
 
-        if (damageable != null) damageable.Damage(damageAmount);
-        
-        Destroy(gameObject);
+            if (damageable != null) damageable.Damage(damageAmount);
+            
+            Destroy(gameObject);
+        }
     }
 
 }

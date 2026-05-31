@@ -9,6 +9,8 @@ namespace Enemy
     public class EnemyBase3D : MonoBehaviour, IDamageable
     {
         public Collider collider;
+        public FlashColor3D flashColor;
+        public ParticleSystem hitParticleSystem;
         public float startLife = 10f;
         [SerializeField] private float _currentLife;
         
@@ -19,6 +21,14 @@ namespace Enemy
         public float startAnimationDuration = 0.5f;
         public Ease startAnimationEase = Ease.OutBack;
         public bool startWithBornAnimation = true;
+
+        private void OnValidate()
+        {
+            if (collider == null) collider = GetComponent<Collider>();
+            if (flashColor == null) flashColor = GetComponentInChildren<FlashColor3D>();
+            if (hitParticleSystem == null) hitParticleSystem = GetComponentInChildren<ParticleSystem>();
+            if (_animationBase == null) _animationBase = GetComponentInChildren<AnimationBase>();
+        }
 
         private void Awake()
         {
@@ -51,6 +61,8 @@ namespace Enemy
 
         public void OnDamage(float damage)
         {
+            if (flashColor != null) flashColor.Flash();
+            if (hitParticleSystem != null) hitParticleSystem.Play();
             _currentLife -= damage;
             if(_currentLife <= 0)
             {

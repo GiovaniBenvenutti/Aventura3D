@@ -10,6 +10,10 @@ public class GunBase3D : MonoBehaviour
     public float timeBetweenShoot = 0.2f;
     public float speed = 50f;
 
+    public float projectileSize = 1f;
+    public float projectileDamage = 1f;
+    public Color projectileColor = Color.red;
+
     //public KeyCode keyToShoot = KeyCode.Z;
 
     private Coroutine _currentCoroutine;
@@ -29,6 +33,9 @@ public class GunBase3D : MonoBehaviour
         projectile.transform.position = positionToShoot.position;
         projectile.transform.rotation = positionToShoot.rotation;
         projectile.speed = speed;
+        projectile.damageAmount = (int)projectileDamage;
+        projectile.transform.localScale = new Vector3(projectileSize, projectileSize, projectileSize);
+        projectile.GetComponentInChildren<MeshRenderer>().material.SetColor("_Color", projectileColor);
     }
 
     public void StartShoot()

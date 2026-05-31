@@ -112,7 +112,10 @@ MonoBehaviour:
   prefabProjectile: {fileID: 9016670752627664034, guid: e831e1ede0659984ebfcab385d0763a0, type: 3}
   positionToShoot: {fileID: 6708625648877791681}
   timeBetweenShoot: 0.2
-  speed: 50
+  speed: 75
+  projectileSize: 1
+  projectileDamage: 1
+  projectileColor: {r: 0.46293166, g: 0.9528302, b: 0.73930085, a: 1}
 --- !u!1 &6708625648877791680
 GameObject:
   m_ObjectHideFlags: 0

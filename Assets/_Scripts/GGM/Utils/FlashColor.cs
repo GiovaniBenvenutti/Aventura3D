@@ -33,15 +33,7 @@ public class FlashColor : MonoBehaviour
 
         foreach(var sr in spriteRenderers)
         {
-            _currentTween =sr.DOColor(flashColor, flashDuration).SetLoops(2, LoopType.Yoyo);
+            _currentTween = sr.DOColor(flashColor, flashDuration).SetLoops(2, LoopType.Yoyo);
         }
     }
-
-    // void Update()
-    // {
-    //     if(Input.GetKeyDown(KeyCode.F))
-    //     {
-    //         Flash();
-    //     }
-    // }
 }
