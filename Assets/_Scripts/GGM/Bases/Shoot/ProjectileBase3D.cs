@@ -25,7 +25,15 @@ public class ProjectileBase3D : MonoBehaviour
             Debug.Log($"Projectile collided with {collision.gameObject.name}");
             var damageable = collision.transform.GetComponent<IDamageable>();
 
-            if (damageable != null) damageable.Damage(damageAmount);
+            if (damageable != null) 
+            {
+                Vector3 direction = collision.transform.position - transform.position;
+                direction = -direction.normalized *3f;
+                // direction.y = 0f;
+                direction.y *= 2f;
+
+                damageable.Damage(damageAmount, direction);
+            }
             
             Destroy(gameObject);
         }

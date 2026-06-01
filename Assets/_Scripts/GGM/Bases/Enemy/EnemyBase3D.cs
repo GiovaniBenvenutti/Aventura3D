@@ -89,19 +89,50 @@ namespace Enemy
 
 
         #region Debug
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.T))
-            {
-                OnDamage(5f);
-            }
-        }
+        // private void Update()
+        // {
+        //     if(Input.GetKeyDown(KeyCode.T))
+        //     {
+        //         OnDamage(5f);
+        //     }
+        // }
         #endregion
 
         public void Damage(float damage)
         {
             OnDamage(damage);
         }
+    public void Damage(float damage, Vector3 direction)
+    {
+        OnDamage(damage);
+
+        CharacterController controller = GetComponent<CharacterController>();
+
+        if (controller != null)
+        {
+            // Se tiver CharacterController, aplica deslocamento via Move
+            StartCoroutine(Knockback(controller, direction));
+        }
+        else
+        {
+            // Se não tiver, usa DOTween normalmente
+            transform.DOMove(transform.position - direction, 0.2f);
+        }
+    }
+
+    private IEnumerator Knockback(CharacterController controller, Vector3 direction)
+    {
+        float duration = 0.2f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            controller.Move(-direction * (Time.deltaTime / duration));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+    }
+
 
     }
 }
