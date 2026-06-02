@@ -6,6 +6,7 @@ using DG.Tweening;
 public class FlashColor3D : MonoBehaviour
 {
     public MeshRenderer meshRenderer;
+    public SkinnedMeshRenderer skinnedMeshRenderer;
 
     [Header("Setup")]
     public Color flashColor = Color.red;
@@ -18,19 +19,25 @@ public class FlashColor3D : MonoBehaviour
     void OnValidate()
     {
         if (meshRenderer == null) meshRenderer = GetComponentInChildren<MeshRenderer>();
+        if (skinnedMeshRenderer == null) skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
 
 
-    void Start()
-    {
-        _defaultColor = meshRenderer.material.GetColor("_EmissionColor");
-    }
+    // void Start()
+    // {
+    //     _defaultColor = meshRenderer.material.GetColor("_EmissionColor");
+    // }
 
 
     [NaughtyAttributes.Button]
     public void Flash()
     {
-        if (!_currentTween.IsActive())
+        Debug.Log("Flash");
+        if (meshRenderer != null && !_currentTween.IsActive())
             _currentTween = meshRenderer.material.DOColor(flashColor, "_EmissionColor", flashDuration).SetLoops(2, LoopType.Yoyo);
+
+        if (skinnedMeshRenderer != null && !_currentTween.IsActive())
+             _currentTween = skinnedMeshRenderer.material.DOColor(flashColor, "_EmissionColor", flashDuration).SetLoops(2, LoopType.Yoyo);
+        
     }
 }

@@ -206,6 +206,20 @@ MonoBehaviour:
   - {fileID: 1902578937078886864, guid: 677003b64fc73fc4487c54edb7e392a6, type: 3}
   - {fileID: 4262759402331546086, guid: fd72f6a409a45c04aa88f5eaa68d4f92, type: 3}
   gunPosition: {fileID: 1894668460}
+--- !u!136 &45918146
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45918138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2
+  m_Height: 4
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.1, z: 0}
 --- !u!4 &55208242 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 760484118347486817, guid: efc6c18c616b68b4999a441a18cbd405, type: 3}
@@ -902,6 +916,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709411826}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &758764923 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5376502988085879704, guid: 87095aa8f592f4843a9be3dc07e8a50b, type: 3}
+  m_PrefabInstance: {fileID: 3971896707720954871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &758764925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758764923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee21413bc718e34cae31bc00939197a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
+  skinnedMeshRenderer: {fileID: 1122248337}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
 --- !u!4 &895617942 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3136497954080876995, guid: f2e57f776342b0f4796fac77e7c33789, type: 3}
@@ -1242,6 +1277,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 062a2e06b54b4ae45a4254b9a4be2c4f, type: 3}
+--- !u!137 &1122248337 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7270105701348821502, guid: 87095aa8f592f4843a9be3dc07e8a50b, type: 3}
+  m_PrefabInstance: {fileID: 3971896707720954871}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1131981117 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8711277840774425792, guid: de26322d17bf8df49a74450be4c0ebe5, type: 3}
@@ -2913,6 +2953,14 @@ PrefabInstance:
       propertyPath: animatorManager
       value: 
       objectReference: {fileID: 4108313260178684801}
+    - target: {fileID: 1016874697385212047, guid: 87095aa8f592f4843a9be3dc07e8a50b, type: 3}
+      propertyPath: flashColors.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1016874697385212047, guid: 87095aa8f592f4843a9be3dc07e8a50b, type: 3}
+      propertyPath: flashColors.Array.data[0]
+      value: 
+      objectReference: {fileID: 758764925}
     - target: {fileID: 4108313260178684796, guid: 87095aa8f592f4843a9be3dc07e8a50b, type: 3}
       propertyPath: spc
       value: 

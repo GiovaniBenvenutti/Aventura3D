@@ -102,37 +102,47 @@ namespace Enemy
         {
             OnDamage(damage);
         }
-    public void Damage(float damage, Vector3 direction)
-    {
-        OnDamage(damage);
-
-        CharacterController controller = GetComponent<CharacterController>();
-
-        if (controller != null)
+        public void Damage(float damage, Vector3 direction)
         {
-            // Se tiver CharacterController, aplica deslocamento via Move
-            StartCoroutine(Knockback(controller, direction));
+            OnDamage(damage);
+
+            CharacterController controller = GetComponent<CharacterController>();
+
+            if (controller != null)
+            {
+                // Se tiver CharacterController, aplica deslocamento via Move
+                StartCoroutine(Knockback(controller, direction));
+            }
+            else
+            {
+                // Se não tiver, usa DOTween normalmente
+                transform.DOMove(transform.position - direction, 0.2f);
+            }
         }
-        else
+
+        private IEnumerator Knockback(CharacterController controller, Vector3 direction)
         {
-            // Se não tiver, usa DOTween normalmente
-            transform.DOMove(transform.position - direction, 0.2f);
+            float duration = 0.2f;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                controller.Move(-direction * (Time.deltaTime / duration));
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
         }
-    }
 
-    private IEnumerator Knockback(CharacterController controller, Vector3 direction)
-    {
-        float duration = 0.2f;
-        float elapsed = 0f;
 
-        while (elapsed < duration)
+        private void OnCollisionEnter(Collision collision)
         {
-            controller.Move(-direction * (Time.deltaTime / duration));
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-    }
+            Player p = collision.transform.GetComponent<Player>();
 
+            if (p != null)
+            {
+                p.Damage(1f);
+            }
+        }
 
     }
 }

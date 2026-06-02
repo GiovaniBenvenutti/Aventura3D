@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     PlayerStateManager playerStateManager;
     public CharacterController characterController;
@@ -32,6 +32,25 @@ public class Player : MonoBehaviour
     public float speedRun = 1.5f;
 
     public Vector3 speedVector;
+
+    [Header("FlashColor")]
+    public List<FlashColor3D> flashColors;
+
+    #region Life
+    public void Damage(float damage)
+    {
+        flashColors.ForEach(f => f.Flash());
+    }
+
+    public void Damage(float damage, Vector3 direction)
+    {
+        //throw new NotImplementedException();
+        flashColors.ForEach(f => f.Flash());
+
+    }
+
+    #endregion
+
 
     void Awake()
     {
@@ -113,8 +132,7 @@ public class Player : MonoBehaviour
 
 
 
-        
-    
+
 
 
 
