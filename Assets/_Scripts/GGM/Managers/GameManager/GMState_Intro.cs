@@ -5,7 +5,7 @@ using GGM.FSM;
 
 public class GMState_Intro : StateBase
 {
-    public override void OnStateEnter(Object o = null)
+    public override void OnStateEnter(params object[] o)
     {
         base.OnStateEnter(o);
         Debug.Log("Intro State");

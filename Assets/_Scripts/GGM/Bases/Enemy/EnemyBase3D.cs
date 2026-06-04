@@ -12,6 +12,9 @@ namespace Enemy
         public FlashColor3D flashColor;
         public ParticleSystem hitParticleSystem;
         public float startLife = 10f;
+        public bool lookAtPlayer = false;
+
+        private Player _player;
         [SerializeField] private float _currentLife;
         
         [Header("Animation")]
@@ -33,7 +36,19 @@ namespace Enemy
         private void Awake()
         {
             Init();
+            if (_player == null) _player = FindObjectOfType<Player>();
         }
+
+
+
+        public virtual void Update()
+        {
+            if (lookAtPlayer)
+            {                
+                transform.LookAt(_player.transform.position);
+            }
+        }
+
 
         protected virtual void ResetLife()
         {

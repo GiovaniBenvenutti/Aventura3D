@@ -45,8 +45,8 @@ public class Player : MonoBehaviour, IDamageable
     public void Damage(float damage, Vector3 direction)
     {
         //throw new NotImplementedException();
-        flashColors.ForEach(f => f.Flash());
-
+        //flashColors.ForEach(f => f.Flash());
+        Damage(damage);
     }
 
     #endregion
