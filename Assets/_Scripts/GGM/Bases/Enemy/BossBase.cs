@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,17 +15,24 @@ namespace Boss
         WALK,
         ATTACK,
         SHOOT,
+        DEATH,
         PHASE1,
         PHASE2,
         PHASE3
     }
     public class BossBase : MonoBehaviour
     {
+        public BossHealth healthBase;   // usando outro nome porque já existia um doc healthBase
         private StateMachine<BossAction> _stateMachine;
 
         [Header("Animation")]
         public float startAnimationDuration = 1f;
         public Ease startAnimationEase = Ease.OutBack;
+
+        [Header("Attack")]
+        public int attackAmount = 5;
+        public float timeBtweenAttacks = .5f;
+
 
         [Header("Movement")]
         public float speed = 5f;
@@ -33,6 +41,7 @@ namespace Boss
         private void Awake()
         {
             Init();
+            healthBase.OnKill += OnBossKill;
         }
 
         private void Init()
@@ -42,16 +51,50 @@ namespace Boss
 
             _stateMachine.RegisterStates(BossAction.INIT, new BossStateInit());
             _stateMachine.RegisterStates(BossAction.WALK, new BossStateWalk());
+            _stateMachine.RegisterStates(BossAction.ATTACK, new BossStateAttack());
+            _stateMachine.RegisterStates(BossAction.DEATH, new BossStateDeath());
         }
 
-        #region Moviment
 
-        public void GoToRandomPoint()
+        public void OnBossKill(BossHealth health)
         {
-            StartCoroutine(GoToPointCoroutine(wayPoints[Random.Range(0, wayPoints.Count)]));
+           // Debug.Log("Boss morreu");
+            SwitchState(BossAction.DEATH);
         }
 
-        IEnumerator GoToPointCoroutine(Transform t)
+        #region Attack
+
+        public void StartAttack(Action EndCallBack = null)
+        {
+            StartCoroutine(AttackCoroutine(EndCallBack));
+        }
+
+        IEnumerator AttackCoroutine(Action EndCallBack = null)
+        {
+            int attacks = 0;
+
+            while (attacks < attackAmount)
+            {
+                attacks++;
+                transform.DOScale(1.2f, .1f).SetLoops(2, LoopType.Yoyo);
+                Debug.Log("Attack");
+                yield return new WaitForSeconds(timeBtweenAttacks);
+            }
+            EndCallBack?.Invoke();
+        }
+
+
+        #endregion
+
+
+        #region Walk
+
+        public void GoToRandomPoint(Action OnArrive = null)
+        {
+            StartCoroutine(GoToPointCoroutine(wayPoints[UnityEngine.Random.Range(0, wayPoints.Count)], OnArrive));
+        }
+
+        IEnumerator GoToPointCoroutine(Transform t, Action OnArrive = null)
         {
             while (Vector3.Distance(transform.position, t.position) > 0.1f)
             {
@@ -59,12 +102,14 @@ namespace Boss
                 
                 yield return new WaitForEndOfFrame();
             }
-            
+            //if (OnArrive != null) OnArrive.Invoke();
+            OnArrive?.Invoke();     // isso é a mesma coisa que a linha de cima, só que mais simples. O "?." é o operador de acesso condicional, ele verifica se o On   Arrive é diferente de null antes de chamar o Invoke()
         }
 
 
 
         #endregion
+
 
         #region Animation
 
@@ -76,8 +121,9 @@ namespace Boss
 
         #endregion
 
+
         #region Debug
-        
+
         [NaughtyAttributes.Button]
         private void SwitchStateINIT()
         {
@@ -88,6 +134,12 @@ namespace Boss
         private void SwitchStateWALK()
         {
             SwitchState(BossAction.WALK);
+        }
+
+        [NaughtyAttributes.Button]
+        private void SwitchStateATTACK()
+        {
+            SwitchState(BossAction.ATTACK);
         }
 
         #endregion
