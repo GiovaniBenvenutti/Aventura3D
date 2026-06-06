@@ -7,6 +7,8 @@ public class Player : MonoBehaviour, IDamageable
 {
     PlayerStateManager playerStateManager;
     public CharacterController characterController;
+
+    public HealthBase health;
     public Animator animator;
     public float speed = 1f;
     public float turnSpeed = 1f;
@@ -47,10 +49,18 @@ public class Player : MonoBehaviour, IDamageable
         //throw new NotImplementedException();
         //flashColors.ForEach(f => f.Flash());
         Damage(damage);
+        health.Damage(damage);
     }
 
     #endregion
 
+    void OnValidate()
+    {
+        if (characterController == null) characterController = GetComponent<CharacterController>();
+        if (animator == null) animator = GetComponent<Animator>();
+        if (animatorManager == null) animatorManager = GetComponent<AnimatorManager>();
+        if (health == null) health = GetComponent<HealthBase>();
+    }
 
     void Awake()
     {

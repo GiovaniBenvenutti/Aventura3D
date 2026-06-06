@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4108313260178684798}
   - component: {fileID: 4108313260178684796}
   - component: {fileID: 4108313260178684799}
+  - component: {fileID: 9118403613704531241}
   m_Layer: 0
   m_Name: PLAYER
   m_TagString: Untagged
@@ -66,6 +67,7 @@ MonoBehaviour:
   runKey: 304
   speedRun: 30
   speedVector: {x: 0, y: 0, z: 0}
+  flashColors: []
 --- !u!143 &3269349262874828955
 CharacterController:
   m_ObjectHideFlags: 0
@@ -176,6 +178,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07564827b19e4d446aea576cfd735c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9118403613704531241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016874697385212045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3109eb013e8e84e9c2e54c2ab566fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startLife: 20
+  destroiOnKill: 1
+  delayToKill: 1
 --- !u!1001 &1355985610840055458
 PrefabInstance:
   m_ObjectHideFlags: 0

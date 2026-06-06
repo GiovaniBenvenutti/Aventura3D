@@ -12,7 +12,7 @@ namespace Enemy
         public FlashColor3D flashColor;
         public ParticleSystem hitParticleSystem;
         public float startLife = 10f;
-        public bool lookAtPlayer = false;
+        public bool lookAtPlayer = true;
 
         private Player _player;
         [SerializeField] private float _currentLife;

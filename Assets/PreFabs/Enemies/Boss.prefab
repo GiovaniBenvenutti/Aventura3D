@@ -396,6 +396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 1985594969}
+  characterController: {fileID: 0}
+  _player: {fileID: 0}
+  lookAtPlayer: 1
   flashColor: {fileID: 1985594970}
   hitParticleSystem: {fileID: 6117414717270131610}
   animator: {fileID: 3723182561327706897}
@@ -404,6 +407,8 @@ MonoBehaviour:
   startAnimationEase: 27
   attackAmount: 5
   timeBtweenAttacks: 0.5
+  distanceToStart: 5
+  gravity: -9.81
   _animationBase: {fileID: 1985594968}
   speed: 10
   wayPoints:
@@ -440,7 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startLife: 10
   destroyOnKill: 0
-  _currentLife: 0
+  currentLife: 0
 --- !u!114 &1985594968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,7 +719,7 @@ GameObject:
   - component: {fileID: 6117414718630380274}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -25,10 +25,17 @@ namespace Boss
     public class BossBase : MonoBehaviour, IDamageable
     {
         public Collider collider;
+
+        public CharacterController characterController;
+
+        public Player _player;
+        public bool lookAtPlayer = true;
+        //private bool checkingDistance = false;
+
         public FlashColor3D flashColor;
         public ParticleSystem hitParticleSystem;
         public Animator animator;
-        public BossHealth healthBase;   // usando outro nome porque já existia um doc healthBase
+        public BossHealth health;   // usando outro nome porque já existia um doc healthBase
         private StateMachine<BossAction> _stateMachine;
 
         [Header("Animation")]
@@ -38,6 +45,10 @@ namespace Boss
         [Header("Attack")]
         public int attackAmount = 5;
         public float timeBtweenAttacks = .5f;
+        private bool checkingDistance = false;
+        public float distanceToStart = 5f;
+        private float verticalVelocity = 0f;
+        public float gravity = -9.81f;
 
 
         [Header("Animation")]
@@ -51,25 +62,83 @@ namespace Boss
         void OnValidate()
         {
             if (animator == null) animator = GetComponentInChildren<Animator>();
-            if (healthBase == null) healthBase = GetComponent<BossHealth>();
+            if (health == null) health = GetComponent<BossHealth>();
             
             if (collider == null) collider = GetComponent<Collider>();
             if (flashColor == null) flashColor = GetComponentInChildren<FlashColor3D>();
             if (hitParticleSystem == null) hitParticleSystem = GetComponentInChildren<ParticleSystem>();
             if (_animationBase == null) _animationBase = GetComponentInChildren<AnimationBase>();
+            if (characterController == null) characterController = GetComponent<CharacterController>();
         }
 
         private void Awake()
         {
             Init();
-            healthBase.OnKill += OnBossKill;
-            healthBase.OnDamage += Damage;
+            health.OnKill += OnBossKill;
+            //health.OnDamage += Damage;
         }
 
-        private void Start()
+        // private void Start()
+        // {
+        //     //SwitchState(BossAction.INIT);
+        // }
+
+        public virtual void Update()
         {
-            SwitchState(BossAction.INIT);
+            if (characterController != null)
+            {
+                // aplica gravidade
+                if (characterController.isGrounded)
+                {
+                    // se está no chão, zera a velocidade vertical
+                    verticalVelocity = 0f;
+                }
+                else
+                {
+                    // acumula gravidade
+                    verticalVelocity += gravity * Time.deltaTime;
+                }
+
+                // move apenas no eixo Y
+                Vector3 move = new Vector3(0, verticalVelocity * Time.deltaTime, 0);
+                characterController.Move(move);
+            }
+
+            if (lookAtPlayer && _player != null)
+            {                
+                transform.LookAt(_player.transform.position);
+
+                if (!checkingDistance)
+                {
+                    StartCoroutine(CheckPlayerDistance());
+                }
+            }
         }
+
+
+        IEnumerator CheckPlayerDistance()
+        {
+            checkingDistance = true;
+
+            while (_player != null) // mantém loop enquanto houver player
+            {
+                float distance = Vector3.Distance(transform.position, _player.transform.position);
+
+                if (distance < distanceToStart)
+                {
+                    SwitchState(BossAction.INIT);
+                    Debug.Log("Player perto, iniciando combate");
+                    // Se quiser parar aqui, use break; 
+                    // Se quiser continuar verificando, apenas deixa o loop rodar
+                }
+
+                yield return new WaitForSeconds(1f); // espera 1 segundo antes da próxima checagem
+            }
+
+            checkingDistance = false;
+        }
+
+
 
         private void Init()
         {
@@ -254,10 +323,10 @@ namespace Boss
         {
             if (flashColor != null) flashColor.Flash();
             if (hitParticleSystem != null) hitParticleSystem.Play();
-            healthBase.currentLife -= damage;
-            if(healthBase.currentLife <= 0)
+            health.Damage(damage);
+            if(health.currentLife <= 0)
             {
-                OnBossKill(healthBase);
+                OnBossKill(health);
             }
         }
 

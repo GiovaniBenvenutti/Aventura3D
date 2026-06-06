@@ -6,11 +6,11 @@ using System;
 public class HealthBase : MonoBehaviour
 {
     public Action OnKill;
-    public int startLife = 20;
+    public float startLife = 20f;
     public bool destroiOnKill = false;
     public float delayToKill = 0f;
 
-    private int _currentLife;
+    [SerializeField] private float _currentLife;
     private bool _isDead = false;
     private FlashColor _flashColor;
 
@@ -28,7 +28,7 @@ public class HealthBase : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
         if(_isDead) return;
 
