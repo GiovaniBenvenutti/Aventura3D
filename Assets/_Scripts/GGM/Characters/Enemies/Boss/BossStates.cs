@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GGM.FSM;
+using DG.Tweening;
 
 namespace Boss
 {
@@ -22,8 +23,15 @@ namespace Boss
         {
             base.OnStateEnter(objs);
             boss.StartInitAnimation();
-            Debug.Log("BossStateInit");
+            // Debug.Log("BossStateInit");
+            boss.StartWalk(EndInit);
         }
+
+        private void EndInit()
+        {
+            boss.SwitchState(BossAction.WALK);
+        }
+
     }
     
     public class BossStateWalk : BossStateBase
@@ -32,7 +40,8 @@ namespace Boss
         {
             base.OnStateEnter(objs);
             boss.GoToRandomPoint(OnArrive);
-            Debug.Log("BossStateWalk");
+           // Debug.Log("BossStateWalk");
+            boss.animator.SetTrigger("Run");
         }
 
         private void OnArrive()
@@ -53,7 +62,6 @@ namespace Boss
         {
             base.OnStateEnter(objs);
             boss.StartAttack(EndAttack);
-            Debug.Log("BossStateAttack");
         }
 
         private void EndAttack()
@@ -68,7 +76,8 @@ namespace Boss
         {
             base.OnStateEnter(objs);
             Debug.Log("BossStateDeath");
-            boss.transform.localScale = Vector3.one * 0.8f;
+            boss.transform.DOScale(Vector3.one * 0.8f, 1f);
+            boss.StartDeathAnimation();
         }
     }
 

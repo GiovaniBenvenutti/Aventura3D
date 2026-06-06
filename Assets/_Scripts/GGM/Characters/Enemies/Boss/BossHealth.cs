@@ -5,8 +5,8 @@ using UnityEngine;
 public class BossHealth : MonoBehaviour
 {
     public float startLife = 10f;
-    public bool destroyOnKill = false;
-    [SerializeField] private float _currentLife;
+    public bool destroyOnKill = true;
+    public float currentLife;
 
     public Action<BossHealth> OnDamage;
     public Action<BossHealth> OnKill;
@@ -23,7 +23,7 @@ public class BossHealth : MonoBehaviour
 
     public void ResetLife()
     {
-        _currentLife = startLife;
+        currentLife = startLife;
     }
 
     protected virtual void Kill()
@@ -42,9 +42,9 @@ public class BossHealth : MonoBehaviour
     public void Damage(float damage)
     {
         Debug.Log("Boss sofreu dano");
-        _currentLife -= damage;
+        currentLife -= damage;
 
-        if(_currentLife <= 0)
+        if(currentLife <= 0)
         {
             Kill();
         }

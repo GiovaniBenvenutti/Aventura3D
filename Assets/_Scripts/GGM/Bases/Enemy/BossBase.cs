@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GGM.FSM;
 using DG.Tweening;
+using GGM.Animation;
 
 
 namespace Boss
@@ -20,8 +21,13 @@ namespace Boss
         PHASE2,
         PHASE3
     }
-    public class BossBase : MonoBehaviour
+
+    public class BossBase : MonoBehaviour, IDamageable
     {
+        public Collider collider;
+        public FlashColor3D flashColor;
+        public ParticleSystem hitParticleSystem;
+        public Animator animator;
         public BossHealth healthBase;   // usando outro nome porque já existia um doc healthBase
         private StateMachine<BossAction> _stateMachine;
 
@@ -34,14 +40,35 @@ namespace Boss
         public float timeBtweenAttacks = .5f;
 
 
+        [Header("Animation")]
+        [SerializeField] private AnimationBase _animationBase;
+
+
         [Header("Movement")]
         public float speed = 5f;
         public List<Transform> wayPoints;
+
+        void OnValidate()
+        {
+            if (animator == null) animator = GetComponentInChildren<Animator>();
+            if (healthBase == null) healthBase = GetComponent<BossHealth>();
+            
+            if (collider == null) collider = GetComponent<Collider>();
+            if (flashColor == null) flashColor = GetComponentInChildren<FlashColor3D>();
+            if (hitParticleSystem == null) hitParticleSystem = GetComponentInChildren<ParticleSystem>();
+            if (_animationBase == null) _animationBase = GetComponentInChildren<AnimationBase>();
+        }
 
         private void Awake()
         {
             Init();
             healthBase.OnKill += OnBossKill;
+            healthBase.OnDamage += Damage;
+        }
+
+        private void Start()
+        {
+            SwitchState(BossAction.INIT);
         }
 
         private void Init()
@@ -56,18 +83,35 @@ namespace Boss
         }
 
 
+        #region KillBoss
+
         public void OnBossKill(BossHealth health)
         {
+            if (flashColor != null) flashColor.Flash();
+            if (hitParticleSystem != null) hitParticleSystem.Play();
+            if (collider != null) collider.enabled = false;
+            playAnimationByTrigger(AnimationType.DEATH);
+
            // Debug.Log("Boss morreu");
             SwitchState(BossAction.DEATH);
         }
+
+        public void StartDeathAnimation()
+        {
+            animator.SetTrigger("Death");
+        }
+
+        #endregion
+
 
         #region Attack
 
         public void StartAttack(Action EndCallBack = null)
         {
             StartCoroutine(AttackCoroutine(EndCallBack));
+            animator.SetTrigger("Attack");
         }
+
 
         IEnumerator AttackCoroutine(Action EndCallBack = null)
         {
@@ -93,11 +137,23 @@ namespace Boss
         {
             StartCoroutine(GoToPointCoroutine(wayPoints[UnityEngine.Random.Range(0, wayPoints.Count)], OnArrive));
         }
+        public void StartWalk(Action EndCallBack = null)
+        {
+            StartCoroutine(StartWalkCoroutine(EndCallBack));
+        }
+
+        private IEnumerator StartWalkCoroutine(Action EndCallBack)
+        {
+            yield return new WaitForSeconds(1.5f);
+            EndCallBack?.Invoke();
+        }
+
 
         IEnumerator GoToPointCoroutine(Transform t, Action OnArrive = null)
         {
             while (Vector3.Distance(transform.position, t.position) > 0.1f)
             {
+             //   animator.SetTrigger("Walk");    
                 transform.position = Vector3.MoveTowards(transform.position, t.position, Time.deltaTime * speed);
                 
                 yield return new WaitForEndOfFrame();
@@ -117,6 +173,14 @@ namespace Boss
         public void StartInitAnimation()
         {
             transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
+        }
+
+        public void playAnimationByTrigger(AnimationType animationType)
+        {
+            if(_animationBase != null)
+            {
+                _animationBase.PlayAnimationByTrigger(animationType);
+            }
         }
 
         #endregion
@@ -145,16 +209,81 @@ namespace Boss
         #endregion
 
 
-
-
         #region State Machine
 
         public void SwitchState(BossAction state)
         {
             _stateMachine.SwitchState(state, this);
-            
         }
 
+
+        #endregion
+
+        
+        #region Damage
+
+        public void Damage(float damage)
+        {
+            OnDamage(damage);
+        }
+
+        public void Damage(float damage, Vector3 direction)
+        {
+            OnDamage(damage);
+
+            CharacterController controller = GetComponent<CharacterController>();
+
+            if (controller != null)
+            {
+                // Se tiver CharacterController, aplica deslocamento via Move
+                StartCoroutine(Knockback(controller, direction));
+            }
+            else
+            {
+                // Se não tiver, usa DOTween normalmente
+                transform.DOMove(transform.position - direction, 0.2f);
+            }
+        }
+
+        public void Damage(BossHealth health)
+        {
+            OnDamage(0f);
+        }
+
+        public void OnDamage(float damage)
+        {
+            if (flashColor != null) flashColor.Flash();
+            if (hitParticleSystem != null) hitParticleSystem.Play();
+            healthBase.currentLife -= damage;
+            if(healthBase.currentLife <= 0)
+            {
+                OnBossKill(healthBase);
+            }
+        }
+
+        private IEnumerator Knockback(CharacterController controller, Vector3 direction)
+        {
+            float duration = 0.2f;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                controller.Move(-direction * (Time.deltaTime / duration));
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+        }
+
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            Player p = collision.transform.GetComponent<Player>();
+
+            if (p != null)
+            {
+                p.Damage(1f);
+            }
+        }
 
         #endregion
     }
