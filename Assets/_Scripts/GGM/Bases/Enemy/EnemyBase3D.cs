@@ -155,7 +155,7 @@ namespace Enemy
 
             if (p != null)
             {
-                p.Damage(1f);
+                p.health.Damage(1f);
             }
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,10 +24,16 @@ namespace Enemy
             if(healthBase != null)
             {
                 healthBase.OnKill += OnEnemyKill;
+                healthBase.OnDamage += Damage;
             }
         }
 
-        private void OnEnemyKill()
+        private void Damage(HealthBase @base)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void OnEnemyKill(HealthBase healthBase)
         {
             healthBase.OnKill -= OnEnemyKill;
             if (onKillSound != null) onKillSound.Play();

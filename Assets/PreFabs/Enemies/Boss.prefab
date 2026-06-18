@@ -402,7 +402,7 @@ MonoBehaviour:
   flashColor: {fileID: 1985594970}
   hitParticleSystem: {fileID: 6117414717270131610}
   animator: {fileID: 3723182561327706897}
-  healthBase: {fileID: 1985594967}
+  health: {fileID: 1985594967}
   startAnimationDuration: 1
   startAnimationEase: 27
   attackAmount: 5
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLife: 10
-  destroyOnKill: 0
+  destroyOnKill: 1
   currentLife: 0
 --- !u!114 &1985594968
 MonoBehaviour:

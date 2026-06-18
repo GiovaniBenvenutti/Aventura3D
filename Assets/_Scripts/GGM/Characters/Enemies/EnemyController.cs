@@ -105,10 +105,10 @@ public class EnemyController : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             
             // aplica rotação adicional de 180° no eixo X
-            lookRotation *= Quaternion.Euler(0f, 180f, 0f);
+            //lookRotation *= Quaternion.Euler(0f, 180f, 0f);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 5f * Time.deltaTime);
 
-            controller.Move(-transform.forward * moveSpeed * Time.deltaTime);
+            controller.Move(transform.forward * moveSpeed * Time.deltaTime);
 
             if (animationBase != null)
             {
@@ -211,42 +211,42 @@ public class EnemyController : MonoBehaviour
     }
 
 
-private IEnumerator JumpTowardsPlayer()
-{
-    isJumping = true;
-
-    // calcula direção até a posição atual do player
-    Vector3 direction = (player.position - transform.position);
-    direction.y = 0;
-    direction.Normalize();
-
-    // aplica rotação para olhar o player
-    Quaternion lookRotation = Quaternion.LookRotation(-direction);
-    transform.rotation = lookRotation;
-
-    // impulso inicial: vertical + horizontal juntos
-    verticalVelocity = jumpForce;
-
-    // enquanto não tocar efetivamente o chão
-    while (!controller.isGrounded)
+    private IEnumerator JumpTowardsPlayer()
     {
-        // aplica gravidade
-        verticalVelocity += gravity * Time.deltaTime;
+        isJumping = true;
 
-        // movimento horizontal contínuo + vertical
-        Vector3 move = direction * forwardForce * Time.deltaTime;
-        move.y = verticalVelocity * Time.deltaTime;
+        // calcula direção até a posição atual do player
+        Vector3 direction = (player.position - transform.position);
+        direction.y = 0;
+        direction.Normalize();
 
-        controller.Move(move);
+        // aplica rotação para olhar o player
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = lookRotation;
 
-        yield return null; // espera próximo frame
+        // impulso inicial: vertical + horizontal juntos
+        verticalVelocity = jumpForce;
+
+        // enquanto não tocar efetivamente o chão
+        while (!controller.isGrounded)
+        {
+            // aplica gravidade
+            verticalVelocity += gravity * Time.deltaTime;
+
+            // movimento horizontal contínuo + vertical
+            Vector3 move = direction * forwardForce * Time.deltaTime;
+            move.y = verticalVelocity * Time.deltaTime;
+
+            controller.Move(move);
+
+            yield return null; // espera próximo frame
+        }
+
+        // cooldown antes de permitir novo salto
+        yield return new WaitForSeconds(0.2f);
+
+        isJumping = false;
     }
-
-    // cooldown antes de permitir novo salto
-    yield return new WaitForSeconds(0.2f);
-
-    isJumping = false;
-}
 
 
 

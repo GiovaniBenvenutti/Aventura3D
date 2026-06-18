@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossHealth : MonoBehaviour
+public class BossHealth : MonoBehaviour, IDamageable
 {
+    //public Action<float> OnDamage;
+    //public Action OnKill;
+
     public float startLife = 10f;
     public bool destroyOnKill = true;
     public float currentLife;
@@ -48,7 +51,11 @@ public class BossHealth : MonoBehaviour
         {
             Kill();
         }
-        OnDamage?.Invoke(this);
+        //OnDamage?.Invoke(this);
     }
 
+    public void Damage(float damage, Vector3 direction)
+    {
+        Damage(damage);
+    }
 }

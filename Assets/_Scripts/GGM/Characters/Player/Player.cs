@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour
 {
+    public List<Collider> colliders;
     PlayerStateManager playerStateManager;
     public CharacterController characterController;
 
-    public HealthBase health;
     public Animator animator;
     public float speed = 1f;
     public float turnSpeed = 1f;
@@ -17,11 +17,11 @@ public class Player : MonoBehaviour, IDamageable
     [Header("Animation Setup")]
     public AnimatorManager animatorManager;
 
+
     [Header("State Machine")]
     public FSM_Player fsmPlayer;
     public float jumpForce = 20.0f;
     public bool isGrounded;
-    public bool isDead = false;
 
     public KeyCode jumpKey = KeyCode.Space;
     public float gravity = 20f;
@@ -38,21 +38,18 @@ public class Player : MonoBehaviour, IDamageable
     [Header("FlashColor")]
     public List<FlashColor3D> flashColors;
 
-    #region Life
-    public void Damage(float damage)
-    {
-        flashColors.ForEach(f => f.Flash());
-    }
 
-    public void Damage(float damage, Vector3 direction)
-    {
-        //throw new NotImplementedException();
-        //flashColors.ForEach(f => f.Flash());
-        Damage(damage);
-        health.Damage(damage);
-    }
+    [Header("Life")]
+    public bool isDead = false;
+    public HealthBase health;
+    //public UiGunUpdater uiGunUpdater;
+    public float damageCooldown = 1f; // intervalo em segundos
+    private float lastDamageTime = -Mathf.Infinity;
 
-    #endregion
+    [Space]
+    public Vector3 respawnOffSet = new Vector3(1,0,1);
+
+
 
     void OnValidate()
     {
@@ -64,10 +61,14 @@ public class Player : MonoBehaviour, IDamageable
 
     void Awake()
     {
+        OnValidate();   // garante que as referências estejam setadas mesmo no editor
         playerStateManager = GetComponent<PlayerStateManager>();
         characterController = GetComponent<CharacterController>();
         //animator = GetComponent<Animator>();
         //animatorManager = GetComponent<AnimatorManager>();
+
+        health.OnDamage += Damage;
+        health.OnKill += OnKill;
     }
 
     void Start()
@@ -78,9 +79,6 @@ public class Player : MonoBehaviour, IDamageable
         //fsmPlayer = new FSM_Player(this);
     }
 
-
-
-    // Update is called once per frame
     void Update()
     {
         if (isDead)
@@ -126,60 +124,76 @@ public class Player : MonoBehaviour, IDamageable
         animator.SetBool("isRunning", inputAxisVertical != 0);
     }
 
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.gameObject.CompareTag("Enemy"))
+    #region Life
+        public void Damage(HealthBase healthBase)
         {
-            // marca como morto
-            isDead = true;
+            flashColors.ForEach(f => f.Flash());
+        }
 
-            // troca para o estado de morte
-            playerStateManager.SwitchState(playerStateManager.dieState);
+        public void Damage(float damage, Vector3 direction)
+        {
+            //throw new NotImplementedException();
+            //flashColors.ForEach(f => f.Flash());
+            //Damage(damage);
+            //health.Damage(damage);
+        }
 
-            
+        public void OnKill(HealthBase healthBase)
+        {
+            if(!isDead)
+            {
+                Debug.Log("Morreu");
+                isDead = true;
+                playerStateManager.SwitchState(playerStateManager.dieState);
+                //animator.SetTrigger("dead");
+                colliders.ForEach(col => col.enabled = false);
+
+                Invoke(nameof(Revive), 4f);
+            }
+        }
+
+        public void Revive()
+        {
+            Respawn();
+            health.ResetLife();
+            isDead = false;
+            animator.SetTrigger("idle");
+            Invoke(nameof(turnOnColliders), 0.1f);
+        }
+
+        private void turnOnColliders()
+        {
+            colliders.ForEach(col => col.enabled = true);            
+        }
+
+    
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            if (hit.gameObject.CompareTag("Enemy"))
+            {
+                if (Time.time - lastDamageTime >= damageCooldown)
+                {
+                    health.Damage(1f);
+                    lastDamageTime = Time.time; // atualiza o momento do último dano
+                }
+                
+            }
+        }
+
+    #endregion
+
+
+    [NaughtyAttributes.Button]
+    public void Respawn()
+    {
+        if(CheckPointManager.Instance.hasCheckPoint())
+        {
+            Vector3 replace = CheckPointManager.Instance.GetPositionFromLastCheckPoint();
+            replace += respawnOffSet;
+            transform.position = replace;
+            playerStateManager.SwitchState(playerStateManager.idleState);
+
         }
     }
 
-
-
-
-
-
-
-
-    // private void HandleMovement()
-    // {
-
-    //     if (Input.GetKeyDown(KeyCode.D))
-    //     {
-    //         isDead = true;
-    //        // PlayDeadAnimation();
-    //     }
-
-    //     if (speed > 0.1f && !isDead)
-    //     {
-    //        // PlayRunAnimation();
-    //     }
-    //     else if (!isDead)
-    //     {
-    //        // PlayIdleAnimation();
-    //     }
-    // }
-
-
-
-
-
-
-    // public void PlayRunAnimation()
-    // {
-    //     animatorManager.Play(AnimatorManager.AnimationType.RUN);
-    // }
-
-
-
-    // public void PlayDeadAnimation()
-    // {
-    //     animatorManager.Play(AnimatorManager.AnimationType.DEAD);
-    // }
 }

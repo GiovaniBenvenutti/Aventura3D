@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
-public class HealthBase : MonoBehaviour
+public class HealthBase : MonoBehaviour, IDamageable
 {
-    public Action OnKill;
+    public Action<HealthBase> OnKill;
+    public Action<HealthBase> OnDamage;
+    public List<UiHealthUpdater> uiUpdaters;
     public float startLife = 20f;
     public bool destroiOnKill = false;
     public float delayToKill = 0f;
@@ -14,17 +17,28 @@ public class HealthBase : MonoBehaviour
     private bool _isDead = false;
     private FlashColor _flashColor;
 
+    // void OnValidade()
+    // {
+    // }
+
     // Start is called before the first frame update
     void Awake()
     {
         Init();
         _flashColor = GetComponent<FlashColor>();
+        uiUpdaters = FindObjectsOfType<UiHealthUpdater>().ToList();
     }
 
     private void Init()
     {
         _isDead = false;
         _currentLife = startLife;
+        UpDateUI();
+    }
+
+    public void ResetLife()
+    {
+        Init();
     }
 
     // Update is called once per frame
@@ -33,6 +47,9 @@ public class HealthBase : MonoBehaviour
         if(_isDead) return;
 
         _currentLife -= damage;
+        UpDateUI();
+        OnDamage?.Invoke(this);
+
         Debug.Log("Sofreu dano");
 
         if(_currentLife <= 0)
@@ -53,6 +70,22 @@ public class HealthBase : MonoBehaviour
         {
             Destroy(gameObject, delayToKill);
         }
-        OnKill?.Invoke();
+        OnKill?.Invoke(this);
+    }
+
+    public void Damage(float damage, Vector3 direction)
+    {
+        Damage(damage);
+    }
+
+    private void UpDateUI()
+    {
+        if(uiUpdaters != null)
+        {
+            foreach(var updater in uiUpdaters)
+            {
+                updater.uiUpdateValue(_currentLife / startLife);
+            }
+        }
     }
 }

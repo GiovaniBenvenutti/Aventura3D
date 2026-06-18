@@ -78,6 +78,7 @@ namespace Boss
             Debug.Log("BossStateDeath");
             boss.transform.DOScale(Vector3.one * 0.8f, 1f);
             boss.StartDeathAnimation();
+
         }
     }
 

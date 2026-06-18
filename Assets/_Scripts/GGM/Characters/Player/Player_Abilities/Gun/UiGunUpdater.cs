@@ -27,9 +27,8 @@ public class UiGunUpdater : MonoBehaviour
 
     public void uiUpdateValue(float max, float currente)
     {
-        // _currentTween?.Kill();
+        _currentTween?.Kill();
         if(_currentTween != null) _currentTween.Kill();
-        // UiImage.fillAmount = 1 - (currente / max);
         _currentTween = UiImage.DOFillAmount(1 - (currente / max), duration).SetEase(ease);
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 using GGM.FSM;
 using DG.Tweening;
 using GGM.Animation;
+//using UnityEngine.SceneManagement;
+
 
 
 namespace Boss
@@ -24,7 +26,8 @@ namespace Boss
 
     public class BossBase : MonoBehaviour, IDamageable
     {
-        public Collider collider;
+        public LoadSceneHelper loadSceneHelper;
+        public new Collider collider;
 
         public CharacterController characterController;
 
@@ -75,7 +78,7 @@ namespace Boss
         {
             Init();
             health.OnKill += OnBossKill;
-            //health.OnDamage += Damage;
+            health.OnDamage += Damage;
         }
 
         // private void Start()
@@ -156,13 +159,27 @@ namespace Boss
 
         public void OnBossKill(BossHealth health)
         {
-            if (flashColor != null) flashColor.Flash();
-            if (hitParticleSystem != null) hitParticleSystem.Play();
+            StartCoroutine(RestartGame(2f));
+
+           // if (flashColor != null) flashColor.Flash();
+           // if (hitParticleSystem != null) hitParticleSystem.Play();
             if (collider != null) collider.enabled = false;
             playAnimationByTrigger(AnimationType.DEATH);
 
-           // Debug.Log("Boss morreu");
             SwitchState(BossAction.DEATH);
+
+            // chama o método RestartGame após 3 segundos
+           // Debug.Log("Boss morreu");
+        }
+
+
+        private IEnumerator RestartGame(float delay)
+        {
+            // espera o tempo definido
+            yield return new WaitForSeconds(delay);
+
+            Debug.Log("coroutine funcionou");
+            loadSceneHelper.Load(loadSceneHelper.GetActiveScene().name);
         }
 
         public void StartDeathAnimation()
@@ -316,7 +333,7 @@ namespace Boss
 
         public void Damage(BossHealth health)
         {
-            OnDamage(0f);
+            OnDamage(1f);
         }
 
         public void OnDamage(float damage)
@@ -350,7 +367,7 @@ namespace Boss
 
             if (p != null)
             {
-                p.Damage(1f);
+                p.health.Damage(1f);
             }
         }
 

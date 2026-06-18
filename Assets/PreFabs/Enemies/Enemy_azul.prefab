@@ -1106,6 +1106,7 @@ GameObject:
   - component: {fileID: 8733427364951783768}
   - component: {fileID: 8733427364951783769}
   - component: {fileID: 2029447020701643189}
+  - component: {fileID: 777200235790592635}
   m_Layer: 0
   m_Name: Enemy_blue
   m_TagString: Untagged
@@ -1225,6 +1226,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &777200235790592635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8733427364951783772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3109eb013e8e84e9c2e54c2ab566fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startLife: 15
+  destroiOnKill: 1
+  delayToKill: 0
+  _currentLife: 0
 --- !u!1 &8733427365260809640
 GameObject:
   m_ObjectHideFlags: 0

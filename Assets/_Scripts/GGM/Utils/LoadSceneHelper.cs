@@ -14,8 +14,18 @@ public class LoadSceneHelper : MonoBehaviour
 
     public void Load(string s)
     {
+        Debug.Log("chamou a troca de cena");
+
         SceneManager.LoadScene(s);
         Time.timeScale = 1f;   // REINICI O TIME SCALE PARA 1 AO CARREGAR CENA
 
+    }
+
+    // retorna a cena ativa
+    public Scene GetActiveScene()
+    {
+
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        return SceneManager.GetActiveScene();
     }
 }
