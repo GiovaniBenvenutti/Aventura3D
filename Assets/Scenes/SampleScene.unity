@@ -248,7 +248,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 6
-  m_Center: {x: 0, y: 1.0009241, z: -0.12390043}
+  m_Center: {x: 0, y: -2, z: -0.12390043}
 --- !u!23 &79131425 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 23321762944091716, guid: 8b4141ff278aa944e95d5357a1b9ad86, type: 3}
@@ -1933,8 +1933,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.16313682, y: -0.000000008487938, z: 0.0000000014034971, w: 0.9866035}
-  m_LocalPosition: {x: -212.6, y: 78.6, z: -103.6}
+  m_LocalRotation: {x: 0.16313684, y: 0.000000008487938, z: -0.0000000014034972, w: 0.9866035}
+  m_LocalPosition: {x: -212.6, y: 92.2, z: -103.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2181,8 +2181,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025874875}
-  m_LocalRotation: {x: 0.16313682, y: -0.000000008487938, z: 0.0000000014034971, w: 0.9866035}
-  m_LocalPosition: {x: -212.6, y: 78.6, z: -103.6}
+  m_LocalRotation: {x: 0.16313684, y: 0.000000008487938, z: -0.0000000014034972, w: 0.9866035}
+  m_LocalPosition: {x: -212.6, y: 92.2, z: -103.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 465861422}
@@ -4691,7 +4691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1016874697385212046, guid: 87095aa8f592f4843a9be3dc07e8a50b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 58.6
+      value: 72.2
       objectReference: {fileID: 0}
     - target: {fileID: 1016874697385212046, guid: 87095aa8f592f4843a9be3dc07e8a50b, type: 3}
       propertyPath: m_LocalPosition.z
