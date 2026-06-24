@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ItemCollectableBase : MonoBehaviour
 {
-    public string compareTag = "CoinCollector";
-    //public float timeToHide = 2f;
-    //public GameObject graficItem;
+    public string compareTag = "Player";
+    public float timeToHide = 2f;
+    public GameObject graficItem;
 
     [Header("FX")]
     public ParticleSystem particleSystem;
@@ -22,15 +22,14 @@ public class ItemCollectableBase : MonoBehaviour
 
     protected virtual void Collect() // o que acontece quando o item é coletado
     {
-        //Debug.Log("Item coletado pelo itemCollectableBase: " + gameObject.name);
-        // if(graficItem != null)
-        // {
-        //     graficItem.SetActive(false);
-        // }
-        //Debug.Log("Collect de itemCollectableBase foi chamado");
-
-        gameObject.SetActive(false);
+        if(graficItem != null) graficItem.SetActive(false);
+        Invoke("HideObject", timeToHide);
         OnCollect();
+    }
+
+    private void HideObject()
+    {
+        gameObject.SetActive(false);        
     }
 
     protected virtual void OnCollect()
@@ -46,6 +45,7 @@ public class ItemCollectableBase : MonoBehaviour
         if (audioSource != null) 
         { 
             AudioSource newAudio = Instantiate(audioSource, transform.position, Quaternion.identity); 
+            Debug.Log("Instanciou o AudioSource");
             newAudio.Play(); 
             Destroy(newAudio.gameObject, newAudio.clip.length); // limpa depois que terminar de tocar
         }
