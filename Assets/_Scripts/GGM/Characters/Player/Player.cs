@@ -49,6 +49,9 @@ public class Player : MonoBehaviour
     [Space]
     public Vector3 respawnOffSet = new Vector3(1,0,1);
 
+    [Space]
+    public ScreenShake shake;
+    
 
 
     void OnValidate()
@@ -57,6 +60,7 @@ public class Player : MonoBehaviour
         if (animator == null) animator = GetComponent<Animator>();
         if (animatorManager == null) animatorManager = GetComponent<AnimatorManager>();
         if (health == null) health = GetComponent<HealthBase>();
+        if (shake == null) shake = GetComponent<ScreenShake>();
     }
 
     void Awake()
@@ -128,6 +132,8 @@ public class Player : MonoBehaviour
         public void Damage(HealthBase healthBase)
         {
             flashColors.ForEach(f => f.Flash());
+            EffectsManager.Instance.ChangeVignette();
+            shake.ShakeTeste();
         }
 
         public void Damage(float damage, Vector3 direction)

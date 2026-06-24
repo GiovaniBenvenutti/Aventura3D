@@ -36,6 +36,8 @@ public class GunBase3D : MonoBehaviour
         projectile.damageAmount = (int)projectileDamage;
         projectile.transform.localScale = new Vector3(projectileSize, projectileSize, projectileSize);
         projectile.GetComponentInChildren<MeshRenderer>().material.SetColor("_Color", projectileColor);
+
+        ShakeCamera.Instance.ShakeTeste();
     }
 
     public void StartShoot()
