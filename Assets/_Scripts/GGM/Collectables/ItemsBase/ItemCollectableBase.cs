@@ -2,52 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemCollectableBase : MonoBehaviour
+namespace GGM.Item
 {
-    public string compareTag = "Player";
-    public float timeToHide = 2f;
-    public GameObject graficItem;
-
-    [Header("FX")]
-    public ParticleSystem particleSystem;
-    public AudioSource audioSource;
-
-    void OnTriggerEnter(Collider collision)     // para haver colisão o outro objeto deve ter rigidbody.
+    
+    public class ItemCollectableBase : MonoBehaviour
     {
-        if (collision.transform.CompareTag(compareTag))
+        public ItemType itemType;
+        public string compareTag = "Player";
+        public float timeToHide = 2f;
+        public GameObject graficItem;
+
+        public new Collider collider;
+
+        [Header("FX")]
+        public new ParticleSystem particleSystem;
+        public AudioSource audioSource;
+
+        private void OnValidate() 
         {
-            Collect();
+            collider = GetComponent<Collider>();    
         }
-    }
 
-    protected virtual void Collect() // o que acontece quando o item é coletado
-    {
-        if(graficItem != null) graficItem.SetActive(false);
-        Invoke("HideObject", timeToHide);
-        OnCollect();
-    }
-
-    private void HideObject()
-    {
-        gameObject.SetActive(false);        
-    }
-
-    protected virtual void OnCollect()
-    {
-        if (particleSystem != null)
+        void OnTriggerEnter(Collider collision)     // para haver colisão o outro objeto deve ter rigidbody.
         {
-            ParticleSystem ps = Instantiate(particleSystem, transform.position, Quaternion.identity);
-            ps.transform.SetParent(null);  // opcional: para removero o sistema de partículas do coletável antes que seja destruidom
-            Debug.Log("Instanciou o sistema de partículas");
-            ps.Play();
+            if (collision.transform.CompareTag(compareTag))
+            {
+                Collect();
+            }
         }
 
-        if (audioSource != null) 
-        { 
-            AudioSource newAudio = Instantiate(audioSource, transform.position, Quaternion.identity); 
-            Debug.Log("Instanciou o AudioSource");
-            newAudio.Play(); 
-            Destroy(newAudio.gameObject, newAudio.clip.length); // limpa depois que terminar de tocar
+        protected virtual void Collect() // o que acontece quando o item é coletado
+        {
+            if(collider != null) collider.enabled = false;
+            if(graficItem != null) graficItem.SetActive(false);
+            Invoke("HideObject", timeToHide);
+            OnCollect();
+        }
+
+        private void HideObject()
+        {
+            gameObject.SetActive(false);        
+        }
+
+        protected virtual void OnCollect()
+        {
+            if (particleSystem != null)
+            {
+                ParticleSystem ps = Instantiate(particleSystem, transform.position, Quaternion.identity);
+                ps.transform.SetParent(null);  // opcional: para removero o sistema de partículas do coletável antes que seja destruidom
+                Debug.Log("Instanciou o sistema de partículas");
+                ps.Play();
+            }
+
+            if (audioSource != null) 
+            { 
+                AudioSource newAudio = Instantiate(audioSource, transform.position, Quaternion.identity); 
+                Debug.Log("Instanciou o AudioSource");
+                newAudio.Play(); 
+                Destroy(newAudio.gameObject, newAudio.clip.length); // limpa depois que terminar de tocar
+            }
+        
+            ItemsManager.Instance.AddByType(itemType);
+        
         }
     }
+
 }

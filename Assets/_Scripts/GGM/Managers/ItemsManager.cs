@@ -3,39 +3,65 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using GGM.Singleton;
+using Microsoft.Unity.VisualStudio.Editor;
 
-public class ItemsManager : Singleton<ItemsManager>
+namespace GGM.Item
 {
-    public SOInt coins;
-    public SOInt air;
-
-
-    // Start is called before the first frame update
-    void Start()
+    public enum ItemType
     {
-        ReSet();
+        COIN,
+        LIFE_PACK
     }
 
-    private void ReSet()
+    [System.Serializable]
+    public class ItemSetup
     {
-        coins.value = 0;
-        air.value = 0;
+        public ItemType itemType;
+        public SOInt soInt;
+        public Sprite UiIcon;
     }
 
-    // Update is called once per frame
-    public void AddCoins(int amount = 1)
+    public class ItemsManager : Singleton<ItemsManager>
     {
-        coins.value += amount;
-        //Debug.Log("itemManager  -->  Moedas coletadas. Total de moedas: " + coins.value);
-        UiInGameManager.updateTextCoins(coins.value.ToString());
-    }
+        public List<ItemSetup> itemSetups;
 
-    // Update is called once per frame
-    public void AddAir(int amount = 1)
-    {
-        air.value += amount;
-        //Debug.Log("itemManager  -->  Ar coletado. Total de ar: " + air.value);
-        UiInGameManager.updateTextAir(air.value.ToString());
+        //public SOInt air;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            ReSet();
+        }
+
+        private void ReSet()
+        {
+            foreach(var i in itemSetups)
+            {
+                i.soInt.value = 0;
+            }
+        }
+
+        // Update is called once per frame
+        public void AddByType(ItemType itemType, int amount = 1)
+        {
+            var item = itemSetups.Find(i => i.itemType == itemType);
+            item.soInt.value += amount;
+            if(item.soInt.value < 0) item.soInt.value = 0;  
+        }
+
+        [NaughtyAttributes.Button]
+        private void addCoin()
+        {
+            AddByType(ItemType.COIN);
+        }
+
+        [NaughtyAttributes.Button]
+        private void addLifePack()
+        {
+            AddByType(ItemType.LIFE_PACK);
+        }
+        
     }
     
 }
+

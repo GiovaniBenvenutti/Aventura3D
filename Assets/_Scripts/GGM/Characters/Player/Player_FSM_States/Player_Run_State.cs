@@ -16,7 +16,7 @@ public class Player_Run_State : PlayerBaseState
     public override void OnStateEnter(PlayerStateManager player)
     {
         Debug.Log("Enter State: RUN");
-        animator.SetTrigger("run");
+        animator.SetTrigger("isRunning");
         animator.speed = 1.3f; // acelera só a animação
     }
 
