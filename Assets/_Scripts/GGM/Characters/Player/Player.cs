@@ -9,6 +9,8 @@ public class Player : Singleton<Player>
 {
     public List<Collider> colliders;
     PlayerStateManager playerStateManager;
+
+    [Tooltip("CharacteController é o jeito certo de movimentar o player")]
     public CharacterController characterController;
     public Animator animator;
     public FSM_Player fsmPlayer;
@@ -152,10 +154,10 @@ public class Player : Singleton<Player>
             health.ResetLife();
             isDead = false;
             animator.SetTrigger("idle");
-            Invoke(nameof(turnOnColliders), 0.1f);
+            Invoke(nameof(TurnOnColliders), 0.1f);
         }
 
-        private void turnOnColliders()
+        private void TurnOnColliders()
         {
             colliders.ForEach(col => col.enabled = true);            
         }

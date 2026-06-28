@@ -9,8 +9,10 @@ namespace GGM.Item
 {
     public enum ItemType
     {
+        [Tooltip("O que for incluido no codigo aqui aparecerá como opção para items da interface, crie um novo prefab de item para armazenar imagem, SO e o que mais for preciso")]
         COIN,
-        LIFE_PACK
+        LIFE_PACK,
+        AIR_DROP
     }
 
     [System.Serializable]
