@@ -6,17 +6,17 @@ using GGM.Item;
 public class ActionLifePack : MonoBehaviour
 {
     public KeyCode keyCode = KeyCode.L;
-    public SOInt soInt;
+    public SOIntString soIntString;
 
     // Start is called before the first frame update
     void Start()
     {
-        soInt = ItemsManager.Instance.GetItemByType(ItemType.LIFE_PACK).soInt;        
+        soIntString = ItemsManager.Instance.GetItemByType(ItemType.LIFE_PACK).soIntString;        
     }
 
     private void RecoverLife()
     {
-        if(soInt.value > 0)
+        if(soIntString.intValue > 0 && Player.Instance.health._currentLife < Player.Instance.health.startLife*0.95)
         {
             ItemsManager.Instance.AddByType(ItemType.LIFE_PACK, -1);
             Player.Instance.health.ResetLife();            

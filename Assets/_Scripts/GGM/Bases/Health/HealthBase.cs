@@ -13,7 +13,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     public bool destroiOnKill = false;
     public float delayToKill = 0f;
 
-    [SerializeField] private float _currentLife;
+    public float _currentLife;
     private bool _isDead = false;
     private FlashColor _flashColor;
 

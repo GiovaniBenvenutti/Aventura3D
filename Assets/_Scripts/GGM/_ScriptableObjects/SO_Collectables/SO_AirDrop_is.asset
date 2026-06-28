@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f127cdf832986994ea7af5b7e8197440, type: 3}
-  m_Name: SO_LifePack
+  m_Name: SO_AirDrop_is
   m_EditorClassIdentifier: 
   intValue: 0
-  stringValue: press L to use
+  stringValue: 

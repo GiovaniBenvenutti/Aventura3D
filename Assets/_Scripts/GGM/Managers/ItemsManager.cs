@@ -19,7 +19,7 @@ namespace GGM.Item
     public class ItemSetup
     {
         public ItemType itemType;
-        public SOInt soInt;
+        public SOIntString soIntString;
         public Sprite UiIcon;
     }
 
@@ -40,7 +40,7 @@ namespace GGM.Item
         {
             foreach(var i in itemSetups)
             {
-                i.soInt.value = 0;
+                i.soIntString.intValue = 0;
             }
         }
 
@@ -54,9 +54,12 @@ namespace GGM.Item
         public void AddByType(ItemType itemType, int amount = 1)
         {
             var item = itemSetups.Find(i => i.itemType == itemType);
-            item.soInt.value += amount;
-            if(item.soInt.value < 0) item.soInt.value = 0;  
+            item.soIntString.intValue += amount;
+            if(item.soIntString.intValue < 0) item.soIntString.intValue = 0;  
         }
+
+
+        #region Debug
 
         [NaughtyAttributes.Button]
         private void addCoin()
@@ -70,6 +73,7 @@ namespace GGM.Item
             AddByType(ItemType.LIFE_PACK);
         }
         
+        #endregion
     }
     
 }

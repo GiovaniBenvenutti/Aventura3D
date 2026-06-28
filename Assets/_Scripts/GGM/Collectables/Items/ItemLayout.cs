@@ -10,6 +10,7 @@ namespace GGM.Item
     {
         public Image UiIcon;
         public TextMeshProUGUI uiValue;
+        public TextMeshProUGUI uiText;
 
         private ItemSetup _currentSetup;
         public void Load(ItemSetup setup)
@@ -21,11 +22,12 @@ namespace GGM.Item
         private void UpdateUi()
         {
             UiIcon.sprite = _currentSetup.UiIcon;
+            uiText.text = _currentSetup.soIntString.stringValue.ToString();
         }
 
         private void Update()
         {
-            uiValue.text = _currentSetup.soInt.value.ToString();
+            uiValue.text = _currentSetup.soIntString.intValue.ToString();
         }
     }
 
