@@ -23,6 +23,7 @@ namespace GGM.Item
 
     public class ItemsManager : Singleton<ItemsManager>
     {
+        [Tooltip("Basta adicionar um ite aqui para ele ser acrescentado na iterface")]
         public List<ItemSetup> itemSetups;
 
         //public SOInt air;
@@ -39,6 +40,12 @@ namespace GGM.Item
             {
                 i.soInt.value = 0;
             }
+        }
+
+        // Update is called once per frame
+        public ItemSetup GetItemByType(ItemType itemType)
+        {
+            return itemSetups.Find(i => i.itemType == itemType);
         }
 
         // Update is called once per frame

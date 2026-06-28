@@ -2,55 +2,42 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GGM.Singleton;
+using NaughtyAttributes;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
     public List<Collider> colliders;
     PlayerStateManager playerStateManager;
     public CharacterController characterController;
-
     public Animator animator;
-    public float speed = 1f;
-    public float turnSpeed = 1f;
-
-
-    [Header("Animation Setup")]
-    public AnimatorManager animatorManager;
-
-
-    [Header("State Machine")]
     public FSM_Player fsmPlayer;
-    public float jumpForce = 20.0f;
-    public bool isGrounded;
 
-    public KeyCode jumpKey = KeyCode.Space;
-    public float gravity = 20f;
+    [Foldout("Moviment Setup")] public float speed = 1f;
+    [Foldout("Moviment Setup")] public float turnSpeed = 1f;
 
-    public float _vSpeed = 0f;
+    [Foldout("Animator Setup")] public AnimatorManager animatorManager;
 
+    [Foldout("Jump Setup")] public float jumpForce = 20.0f;
+    [Foldout("Jump Setup")] public bool isGrounded;
+    [Foldout("Jump Setup")] public KeyCode jumpKey = KeyCode.Space;
+    [Foldout("Jump Setup")] public float gravity = 20f;
+    [Foldout("Jump Setup")] public float _vSpeed = 0f;
 
-    [Header("RunSetup")]
-    public KeyCode runKey = KeyCode.LeftShift;
-    public float speedRun = 1.5f;
+    [Foldout("Run Setup")] public KeyCode runKey = KeyCode.LeftShift;
+    [Foldout("Run Setup")] public float speedRun = 1.5f;
+    [Foldout("Run Setup")] public Vector3 speedVector;
 
-    public Vector3 speedVector;
+    [Foldout("FlashColor Setup")] public List<FlashColor3D> flashColors;
 
-    [Header("FlashColor")]
-    public List<FlashColor3D> flashColors;
-
-
-    [Header("Life")]
-    public bool isDead = false;
-    public HealthBase health;
-    //public UiGunUpdater uiGunUpdater;
-    public float damageCooldown = 1f; // intervalo em segundos
+    [Foldout("LIfe Setup")] public bool isDead = false;
+    [Foldout("LIfe Setup")] public HealthBase health;
+    [Foldout("LIfe Setup")] public float damageCooldown = 1f; // intervalo em segundos
+    [Foldout("LIfe Setup")] public Vector3 respawnOffSet = new Vector3(1,0,1);
+    [Foldout("LIfe Setup")] public ScreenShake shake;
     private float lastDamageTime = -Mathf.Infinity;
-
-    [Space]
-    public Vector3 respawnOffSet = new Vector3(1,0,1);
-
-    [Space]
-    public ScreenShake shake;
+    //public UiGunUpdater uiGunUpdater;
+    //[Space]
     
 
 
@@ -63,9 +50,10 @@ public class Player : MonoBehaviour
         if (shake == null) shake = GetComponent<ScreenShake>();
     }
 
-    void Awake()
+    protected override void Awake()
     {
-        OnValidate();   // garante que as referências estejam setadas mesmo no editor
+        base.Awake();
+        //OnValidate();   // garante que as referências estejam setadas mesmo no editor
         playerStateManager = GetComponent<PlayerStateManager>();
         characterController = GetComponent<CharacterController>();
         //animator = GetComponent<Animator>();
