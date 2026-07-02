@@ -9,13 +9,14 @@ public class HealthBase : MonoBehaviour, IDamageable
     public Action<HealthBase> OnKill;
     public Action<HealthBase> OnDamage;
     public List<UiHealthUpdater> uiUpdaters;
+    public bool isPlayer = false;
     public float startLife = 20f;
     public bool destroiOnKill = false;
     public float delayToKill = 0f;
 
     public float _currentLife;
     private bool _isDead = false;
-    private FlashColor _flashColor;
+    private FlashColor3D _flashColor;
 
     // void OnValidade()
     // {
@@ -25,7 +26,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     void Awake()
     {
         Init();
-        _flashColor = GetComponent<FlashColor>();
+        _flashColor = GetComponent<FlashColor3D>();
         uiUpdaters = FindObjectsOfType<UiHealthUpdater>().ToList();
     }
 
@@ -41,7 +42,13 @@ public class HealthBase : MonoBehaviour, IDamageable
         Init();
     }
 
-    // Update is called once per frame
+    [NaughtyAttributes.Button]
+    public void Damage()
+    {
+        Damage(1f);
+    }
+
+
     public void Damage(float damage)
     {
         if(_isDead) return;
@@ -80,7 +87,7 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     private void UpDateUI()
     {
-        if(uiUpdaters != null)
+        if(uiUpdaters != null && isPlayer)
         {
             foreach(var updater in uiUpdaters)
             {

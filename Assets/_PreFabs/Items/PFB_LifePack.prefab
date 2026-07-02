@@ -49,6 +49,7 @@ MonoBehaviour:
   compareTag: Player
   timeToHide: 0.1
   graficItem: {fileID: 6039916753710440684}
+  collider: {fileID: 8240828210467700654}
   particleSystem: {fileID: 0}
   audioSource: {fileID: 0}
 --- !u!135 &8240828210467700654
@@ -122,6 +123,10 @@ PrefabInstance:
     - target: {fileID: 621584630249350254, guid: af9d1131c788d454fa7dae4544fa99d2, type: 3}
       propertyPath: m_Name
       value: Heart
+      objectReference: {fileID: 0}
+    - target: {fileID: 757868001915144391, guid: af9d1131c788d454fa7dae4544fa99d2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af9d1131c788d454fa7dae4544fa99d2, type: 3}

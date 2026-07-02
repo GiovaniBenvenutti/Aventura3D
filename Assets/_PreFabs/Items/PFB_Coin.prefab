@@ -49,6 +49,7 @@ MonoBehaviour:
   compareTag: Player
   timeToHide: 0.1
   graficItem: {fileID: 6021373276343134738}
+  collider: {fileID: 8871551681349022864}
   particleSystem: {fileID: 0}
   audioSource: {fileID: 0}
 --- !u!135 &8871551681349022864
@@ -71,6 +72,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3680695385134685359}
     m_Modifications:
+    - target: {fileID: 6918556219583511552, guid: 6a301d09debaf1e4a8d3e2657cc44a96, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6954758372675618198, guid: 6a301d09debaf1e4a8d3e2657cc44a96, type: 3}
       propertyPath: m_Name
       value: Coin
