@@ -8,7 +8,8 @@ namespace GGM.Cloth
     public enum ClothType
     {
         ORIGINAL,
-        SPEED
+        SPEED,
+        STRONG
     }
     public class ClothManager : Singleton<ClothManager>
     {

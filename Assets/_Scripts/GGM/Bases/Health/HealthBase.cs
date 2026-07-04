@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using GGM.Cloth;
 
 public class HealthBase : MonoBehaviour, IDamageable
 {
@@ -17,6 +18,8 @@ public class HealthBase : MonoBehaviour, IDamageable
     public float _currentLife;
     private bool _isDead = false;
     private FlashColor3D _flashColor;
+
+    public float DamageMultiply = 1f;
 
     // void OnValidade()
     // {
@@ -53,7 +56,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         if(_isDead) return;
 
-        _currentLife -= damage;
+        _currentLife -= damage * DamageMultiply;
         UpDateUI();
         OnDamage?.Invoke(this);
 
@@ -94,5 +97,17 @@ public class HealthBase : MonoBehaviour, IDamageable
                 updater.uiUpdateValue(_currentLife / startLife);
             }
         }
+    }
+
+    public void ChangeDamageMultiply(float multiply, float duration)
+    {
+        StartCoroutine(ChangeDamageMultiplyCoroutine(multiply, duration));
+    }
+
+    private IEnumerator ChangeDamageMultiplyCoroutine(float multiply, float duration)
+    {
+        DamageMultiply = multiply;
+        yield return new WaitForSeconds(duration);
+        DamageMultiply = 1f;
     }
 }
