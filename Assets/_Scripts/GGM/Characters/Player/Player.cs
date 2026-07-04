@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GGM.Singleton;
 using NaughtyAttributes;
+using GGM.Cloth;
 
 public class Player : Singleton<Player>
 {
@@ -37,6 +38,10 @@ public class Player : Singleton<Player>
     [Foldout("LIfe Setup")] public float damageCooldown = 1f; // intervalo em segundos
     [Foldout("LIfe Setup")] public Vector3 respawnOffSet = new Vector3(1,0,1);
     [Foldout("LIfe Setup")] public ScreenShake shake;
+
+    [Space]
+    [SerializeField] private ClothChanger _clothChanger;
+
     private float lastDamageTime = -Mathf.Infinity;
     //public UiGunUpdater uiGunUpdater;
     //[Space]
@@ -58,6 +63,7 @@ public class Player : Singleton<Player>
         //OnValidate();   // garante que as referências estejam setadas mesmo no editor
         playerStateManager = GetComponent<PlayerStateManager>();
         characterController = GetComponent<CharacterController>();
+        //_clothChanger = GetComponent<ClothChanger>();
         //animator = GetComponent<Animator>();
         //animatorManager = GetComponent<AnimatorManager>();
 
@@ -191,5 +197,36 @@ public class Player : Singleton<Player>
 
         }
     }
+
+
+    public void ChangeSpeed(float newSpeed, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(newSpeed, duration));
+    }
+
+    private IEnumerator ChangeSpeedCoroutine(float newSpeed, float duration)
+    {
+        float originalSpeed = speed;
+        speed = newSpeed;
+
+        yield return new WaitForSeconds(duration);
+
+        speed = originalSpeed;
+    }
+
+    public void ChangeTexture(ClothSetup setup, float duration)
+    {
+        StartCoroutine(ChangeTextureCoroutine(setup, duration));
+    }
+
+    private IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
+    {
+        _clothChanger.ChangeTexture(setup);
+
+        yield return new WaitForSeconds(duration);
+
+        _clothChanger.ResetTexture();
+    }
+
 
 }
