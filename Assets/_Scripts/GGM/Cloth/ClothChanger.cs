@@ -24,7 +24,7 @@ namespace GGM.Cloth
         {
             foreach (var mesh in mesh)
             {
-                mesh.materials[0].SetTexture(shaderIdName, texture);
+                mesh.sharedMaterials[0].SetTexture(shaderIdName, texture);
                 //mesh.material.mainTexture = texture;
             }
         }
