@@ -26,6 +26,7 @@ public class Player : Singleton<Player>
     [Foldout("Jump Setup")] public KeyCode jumpKey = KeyCode.Space;
     [Foldout("Jump Setup")] public float gravity = 20f;
     [Foldout("Jump Setup")] public float _vSpeed = 0f;
+    //[Foldout("Jump Setup")] public bool isJumping = false;
 
     [Foldout("Run Setup")] public KeyCode runKey = KeyCode.LeftShift;
     [Foldout("Run Setup")] public float speedRun = 1.5f;
@@ -81,11 +82,8 @@ public class Player : Singleton<Player>
 
     void Update()
     {
-        if (isDead)
-        {
-            // se está morto, não processa mais nada
-            return;
-        }
+        if (isDead) return; // se está morto, não processa mais nada
+
         // Rotação
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
 
@@ -99,6 +97,8 @@ public class Player : Singleton<Player>
             if (Input.GetKeyDown(jumpKey))
             {
                 playerStateManager.SwitchState(playerStateManager.jumpState);
+                //animator.SetTrigger("jump");
+                //_vSpeed = jumpForce;
             }
         }
 
@@ -199,49 +199,50 @@ public class Player : Singleton<Player>
     }
 
 
-    public void ChangeSpeed(float newSpeed, float duration)
-    {
-        StartCoroutine(ChangeSpeedCoroutine(newSpeed, duration));
-    }
+    #region ClothChanger
+        public void ChangeSpeed(float newSpeed, float duration)
+        {
+            StartCoroutine(ChangeSpeedCoroutine(newSpeed, duration));
+        }
 
-    private IEnumerator ChangeSpeedCoroutine(float newSpeed, float duration)
-    {
-        float originalSpeed = speed;
-        speed = newSpeed;
+        private IEnumerator ChangeSpeedCoroutine(float newSpeed, float duration)
+        {
+            float originalSpeed = speed;
+            speed = newSpeed;
 
-        yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(duration);
 
-        speed = originalSpeed;
-    }
+            speed = originalSpeed;
+        }
 
-    public void ChangeTexture(ClothSetup setup, float duration)
-    {
-        StartCoroutine(ChangeTextureCoroutine(setup, duration));
-    }
+        public void ChangeTexture(ClothSetup setup, float duration)
+        {
+            StartCoroutine(ChangeTextureCoroutine(setup, duration));
+        }
 
-    private IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
-    {
-        _clothChanger.ChangeTexture(setup);
+        private IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
+        {
+            _clothChanger.ChangeTexture(setup);
 
-        yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(duration);
 
-        _clothChanger.ResetTexture();
-    }
+            _clothChanger.ResetTexture();
+        }
 
-    public void ChangeSize(Vector3 scaleMultiplier, float duration)
-    {
-        StartCoroutine(ChangeSizeCoroutine(scaleMultiplier, duration));
-    }
+        public void ChangeSize(Vector3 scaleMultiplier, float duration)
+        {
+            StartCoroutine(ChangeSizeCoroutine(scaleMultiplier, duration));
+        }
 
-    private IEnumerator ChangeSizeCoroutine(Vector3 scaleMultiplier, float duration)
-    {
-        Vector3 originalScale = transform.localScale;
-        transform.localScale = Vector3.Scale(originalScale, scaleMultiplier);
+        private IEnumerator ChangeSizeCoroutine(Vector3 scaleMultiplier, float duration)
+        {
+            Vector3 originalScale = transform.localScale;
+            transform.localScale = Vector3.Scale(originalScale, scaleMultiplier);
 
-        yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(duration);
 
-        transform.localScale = originalScale;
-    }
-
+            transform.localScale = originalScale;
+        }
+    #endregion
 
 }

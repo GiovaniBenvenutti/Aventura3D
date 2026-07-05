@@ -16,6 +16,7 @@ public class Player_Jump_State : PlayerBaseState
     {
         Debug.Log("Enter State: JUMP");
         spc._vSpeed = spc.jumpForce; // impulso inicial
+        spc.animator.SetTrigger("Jump");
     }
 
     public override void OnStateStay(PlayerStateManager player)
@@ -23,6 +24,7 @@ public class Player_Jump_State : PlayerBaseState
         // quando voltar ao chão, troca para Idle
         if (spc.characterController.isGrounded && spc._vSpeed < 0)
         {
+            spc.animator.SetTrigger("Land");
             player.SwitchState(player.idleState);
         }
     }
