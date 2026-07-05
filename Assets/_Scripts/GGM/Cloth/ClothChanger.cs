@@ -14,9 +14,9 @@ namespace GGM.Cloth
         private Texture2D _defaultTexture;
         
 
-        private void Awake()
+        private void Start()
         {
-            _defaultTexture = mesh[0].sharedMaterials[0].GetTexture(shaderIdName) as Texture2D;
+            _defaultTexture = ClothManager.Instance.GetClothByType(ClothType.ORIGINAL).text;
         }
 
         [NaughtyAttributes.Button("Change Texture")]
