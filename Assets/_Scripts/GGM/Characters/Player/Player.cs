@@ -228,5 +228,20 @@ public class Player : Singleton<Player>
         _clothChanger.ResetTexture();
     }
 
+    public void ChangeSize(Vector3 scaleMultiplier, float duration)
+    {
+        StartCoroutine(ChangeSizeCoroutine(scaleMultiplier, duration));
+    }
+
+    private IEnumerator ChangeSizeCoroutine(Vector3 scaleMultiplier, float duration)
+    {
+        Vector3 originalScale = transform.localScale;
+        transform.localScale = Vector3.Scale(originalScale, scaleMultiplier);
+
+        yield return new WaitForSeconds(duration);
+
+        transform.localScale = originalScale;
+    }
+
 
 }

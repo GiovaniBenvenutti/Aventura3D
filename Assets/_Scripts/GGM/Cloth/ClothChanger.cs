@@ -12,6 +12,7 @@ namespace GGM.Cloth
         public string shaderIdName = "_EmissionMap";
 
         private Texture2D _defaultTexture;
+        
 
         private void Awake()
         {

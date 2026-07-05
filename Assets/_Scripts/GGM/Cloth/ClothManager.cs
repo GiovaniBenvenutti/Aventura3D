@@ -9,7 +9,8 @@ namespace GGM.Cloth
     {
         ORIGINAL,
         SPEED,
-        STRONG
+        STRONG,
+        SIZE
     }
     public class ClothManager : Singleton<ClothManager>
     {
