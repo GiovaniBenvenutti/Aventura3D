@@ -16,28 +16,28 @@ public class FlashColor3D : MonoBehaviour
 
     private Tween _currentTween;
 
+    public string collorParameterName = "_EmissionColor";
+
     void OnValidate()
     {
         if (meshRenderer == null) meshRenderer = GetComponentInChildren<MeshRenderer>();
         if (skinnedMeshRenderer == null) skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
 
-
     // void Start()
     // {
     //     _defaultColor = meshRenderer.material.GetColor("_EmissionColor");
     // }
-
 
     [NaughtyAttributes.Button]
     public void Flash()
     {
         Debug.Log("Flash");
         if (meshRenderer != null && !_currentTween.IsActive())
-            _currentTween = meshRenderer.material.DOColor(flashColor, "_EmissionColor", flashDuration).SetLoops(2, LoopType.Yoyo);
+            _currentTween = meshRenderer.material.DOColor(flashColor, collorParameterName, flashDuration).SetLoops(2, LoopType.Yoyo);
 
         if (skinnedMeshRenderer != null && !_currentTween.IsActive())
-             _currentTween = skinnedMeshRenderer.material.DOColor(flashColor, "_EmissionColor", flashDuration).SetLoops(2, LoopType.Yoyo);
+             _currentTween = skinnedMeshRenderer.material.DOColor(flashColor, collorParameterName, flashDuration).SetLoops(2, LoopType.Yoyo);
         
     }
 }

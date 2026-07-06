@@ -8,6 +8,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     public List<GunBase3D> gunBase;
     public Transform gunPosition;
     private GunBase3D _currentGun;
+    public FlashColor3D flashColor;
 
     protected override void Init()
     {
@@ -35,6 +36,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     {
         _currentGun.StartShoot();
         //if (playerController.IsDead) return;
+        flashColor?.Flash();
 
         // Implement shooting logic here
         Debug.Log("Player start shoots!");
