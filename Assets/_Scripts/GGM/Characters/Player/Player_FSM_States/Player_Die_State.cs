@@ -7,14 +7,17 @@ public class Player_Die_State : PlayerBaseState
     private Animator animator;
     private Player spc;
 
-    void Awake()
-    {
-        spc = GetComponent<Player>();
-        animator = spc.animator; // usa o animator do controler para garantir consistência
-    }
+    // void Awake()
+    // {
+    //     spc = GetComponent<Player>();
+    //     animator = spc.animator; // usa o animator do controler para garantir consistência
+    // }
 
     public override void OnStateEnter(PlayerStateManager player)
     {
+        spc = player.GetComponent<Player>();
+        animator = spc.animator; // usa o animator do controler para garantir consistência
+
         Debug.Log("Enter State: DIE");
 
         // zera velocidade vertical e horizontal

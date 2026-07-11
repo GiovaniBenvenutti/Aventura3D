@@ -7,14 +7,16 @@ public class Player_Run_State : PlayerBaseState
     private Player spc;
     private Animator animator;
 
-    void Awake()
-    {
-        spc = GetComponent<Player>();
-        animator = spc.animator; // usa o animator do controler para garantir consistência
-    }
+    // void Awake()
+    // {
+    //     spc = GetComponent<Player>();
+    //     animator = spc.animator; // usa o animator do controler para garantir consistência
+    // }
 
     public override void OnStateEnter(PlayerStateManager player)
     {
+        spc = player.GetComponent<Player>();
+        animator = spc.animator; // usa o animator do controler para garantir consistência
         Debug.Log("Enter State: RUN");
         animator.SetTrigger("isRunning");
         animator.speed = 1.3f; // acelera só a animação

@@ -6,14 +6,16 @@ public class Player_Jump_State : PlayerBaseState
 {
     public Player spc;
 
-    void Awake()
-    {
-        spc = GetComponent<Player>();
-    }
+    // void Awake()
+    // {
+    //     spc = GetComponent<Player>();
+    // }
 
 
     public override void OnStateEnter(PlayerStateManager player)
     {
+        spc = player.GetComponent<Player>();
+
         Debug.Log("Enter State: JUMP");
         spc._vSpeed = spc.jumpForce; // impulso inicial
         spc.animator.SetTrigger("Jump");

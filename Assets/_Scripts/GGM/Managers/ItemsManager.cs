@@ -41,6 +41,7 @@ namespace GGM.Item
         {
             AddByType(ItemType.COIN, (int)SaveManager.Instance.setup.coins);
             AddByType(ItemType.LIFE_PACK, (int)SaveManager.Instance.setup.health);
+            AddByType(ItemType.AIR_DROP, (int)SaveManager.Instance.setup.airDrop);
         }
 
         private void ReSet()
@@ -58,7 +59,7 @@ namespace GGM.Item
         }
 
         // Update is called once per frame
-        public void AddByType(ItemType itemType, int amount = 1)
+        public void AddByType(ItemType itemType, int amount = 0)
         {
             var item = itemSetups.Find(i => i.itemType == itemType);
             item.soIntString.intValue += amount;

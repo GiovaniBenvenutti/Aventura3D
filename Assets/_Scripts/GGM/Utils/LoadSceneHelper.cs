@@ -5,10 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneHelper : MonoBehaviour
 {
-//  POSSO ACESSAR FILE/BUILD SETTINGS/SCENES IN BUILD PARA PEGAR O INDICE DAS MINHAS CENAS  
+//  POSSO ACESSAR FILE/BUILD SETTINGS/SCENES IN BUILD PARA PEGAR O INDICE DAS MINHAS CENAS
+    public int currentLevel;
+
+    void Start()
+    {
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
+    }
+
     public void Load(int i)
     {
         SceneManager.LoadScene(i);
+        Time.timeScale = 1f;    // REINICI O TIME SCALE PARA 1 AO CARREGAR CENA
+    }
+    public void LoadNext()
+    {
+        if(SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Debug.Log(SceneManager.GetActiveScene().buildIndex);
+            //return;
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
         Time.timeScale = 1f;    // REINICI O TIME SCALE PARA 1 AO CARREGAR CENA
     }
 
@@ -18,13 +39,11 @@ public class LoadSceneHelper : MonoBehaviour
 
         SceneManager.LoadScene(s);
         Time.timeScale = 1f;   // REINICI O TIME SCALE PARA 1 AO CARREGAR CENA
-
     }
 
     // retorna a cena ativa
     public Scene GetActiveScene()
     {
-
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         return SceneManager.GetActiveScene();
     }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
+
 
 public class EndGame1 : MonoBehaviour
 {
@@ -11,13 +13,14 @@ public class EndGame1 : MonoBehaviour
 
     private bool _isEndGame = false;
 
-    public int currentLevel = 1;
+    public int currentLevel;
 
 
     // Start is called before the first frame update
     void Start()
     {
         endGameObjects.ForEach(obj => obj.SetActive(false));
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
     // Update is called once per frame
@@ -39,6 +42,9 @@ public class EndGame1 : MonoBehaviour
     {
         _isEndGame = true;
 
+        LoadSceneHelper loadSceneHelper = FindObjectOfType<LoadSceneHelper>();
+        loadSceneHelper.currentLevel = currentLevel;
+
         Debug.Log("End Game"); 
         endGameObjects.ForEach(obj => obj.SetActive(true));
 
@@ -50,7 +56,7 @@ public class EndGame1 : MonoBehaviour
             SaveManager.Instance.SaveLastLevel(currentLevel);
         }
 
-        StartCoroutine(RestartGame(5f)); // REINICIA O JOGO APÓS 2 SEGUNDOS
+        StartCoroutine(RestartGame(7f)); // REINICIA O JOGO APÓS 7 SEGUNDOS
 
     }
 
@@ -62,7 +68,7 @@ public class EndGame1 : MonoBehaviour
 
             Debug.Log("coroutine funcionou");
             //loadSceneHelper.Load(loadSceneHelper.GetActiveScene().name);
-            loadSceneHelper.Load(0); // REINICIA O JOGO CARREGANDO A CENA 0 (MENU)
+            loadSceneHelper.LoadNext(); // REINICIA O JOGO CARREGANDO A CENA 0 (MENU)
         }
 
 

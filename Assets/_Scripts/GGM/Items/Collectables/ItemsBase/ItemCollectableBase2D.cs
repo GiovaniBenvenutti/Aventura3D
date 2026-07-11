@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemCollectableBase2D : MonoBehaviour
 {
     public string compareTag = "Player";
-    public ParticleSystem particleSystem;
+    public new ParticleSystem particleSystem;
 
     [Header("Sounds")]
     public AudioSource audioSource;

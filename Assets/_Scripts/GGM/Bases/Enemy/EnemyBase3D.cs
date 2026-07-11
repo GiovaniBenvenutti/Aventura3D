@@ -8,7 +8,7 @@ namespace Enemy
 {
     public class EnemyBase3D : MonoBehaviour, IDamageable
     {
-        public Collider collider;
+        //public Collider collider;
         public FlashColor3D flashColor;
         public ParticleSystem hitParticleSystem;
         public float startLife = 10f;
@@ -27,7 +27,7 @@ namespace Enemy
 
         private void OnValidate()
         {
-            if (collider == null) collider = GetComponent<Collider>();
+            //if (collider == null) collider = GetComponent<Collider>();
             if (flashColor == null) flashColor = GetComponentInChildren<FlashColor3D>();
             if (hitParticleSystem == null) hitParticleSystem = GetComponentInChildren<ParticleSystem>();
             if (_animationBase == null) _animationBase = GetComponentInChildren<AnimationBase>();
@@ -68,7 +68,7 @@ namespace Enemy
 
         protected virtual void OnKill()
         {
-            if (collider != null) collider.enabled = false;
+            //if (collider != null) collider.enabled = false;
             Destroy(gameObject, 3f);
             playAnimationByTrigger(AnimationType.DEATH);
 

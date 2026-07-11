@@ -5,7 +5,7 @@ using GGM.Item;
 
 public class ItemCollectableCoin : ItemCollectableBase
 {
-    public Collider collider;
+    public new Collider collider;
     public bool isCollected = false;
     public float lerp = 5f;
     public float minDistance = 0.5f;
