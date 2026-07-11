@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using GGM.FSM;
 using DG.Tweening;
 using GGM.Animation;
@@ -52,6 +53,10 @@ namespace Boss
         public float distanceToStart = 5f;
         private float verticalVelocity = 0f;
         public float gravity = -9.81f;
+
+
+        [Header("Events")]
+        public UnityEvent OnKillEvent;
 
 
         [Header("Animation")]
@@ -159,17 +164,18 @@ namespace Boss
 
         public void OnBossKill(BossHealth health)
         {
-            StartCoroutine(RestartGame(2f));
+            //StartCoroutine(RestartGame(2f)); // REINICIA O JOGO APÓS 2 SEGUNDOS
 
-           // if (flashColor != null) flashColor.Flash();
-           // if (hitParticleSystem != null) hitParticleSystem.Play();
+            // if (flashColor != null) flashColor.Flash();
+            // if (hitParticleSystem != null) hitParticleSystem.Play();
             if (collider != null) collider.enabled = false;
             playAnimationByTrigger(AnimationType.DEATH);
 
             SwitchState(BossAction.DEATH);
 
             // chama o método RestartGame após 3 segundos
-           // Debug.Log("Boss morreu");
+            // Debug.Log("Boss morreu");
+            OnKillEvent?.Invoke();
         }
 
 

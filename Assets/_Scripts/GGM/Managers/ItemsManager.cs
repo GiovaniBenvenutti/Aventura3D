@@ -34,6 +34,13 @@ namespace GGM.Item
         void Start()
         {
             ReSet();
+            LoadItemsFromSave();
+        }
+
+        private void LoadItemsFromSave()
+        {
+            AddByType(ItemType.COIN, (int)SaveManager.Instance.setup.coins);
+            AddByType(ItemType.LIFE_PACK, (int)SaveManager.Instance.setup.health);
         }
 
         private void ReSet()
