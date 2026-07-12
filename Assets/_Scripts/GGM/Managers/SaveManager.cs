@@ -83,6 +83,7 @@ public class SaveManager : Singleton<SaveManager>
     public void SaveLastLevel(int lastLevel)
     {
         _saveSetup.lastLevel = lastLevel;
+        this.lastLevel = lastLevel;
         //SaveItems();
         Save();
     }
@@ -132,6 +133,15 @@ public class SaveManager : Singleton<SaveManager>
         }
         FileLoaded?.Invoke(_saveSetup);
     }
+
+    public int GetLastLevel()
+    {
+        Load();
+        Debug.Log("savemanager diz que lastlevel é: " + lastLevel);
+        //return _saveSetup.lastLevel;
+        return lastLevel;
+    }
+
 
     #endregion
 }

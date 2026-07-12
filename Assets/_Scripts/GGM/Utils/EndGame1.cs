@@ -38,38 +38,40 @@ public class EndGame1 : MonoBehaviour
         }
     }
 
+    [NaughtyAttributes.Button("Show End Game")]
     private void ShowEndGame()
     {
         _isEndGame = true;
 
         LoadSceneHelper loadSceneHelper = FindObjectOfType<LoadSceneHelper>();
-        loadSceneHelper.currentLevel = currentLevel;
+        loadSceneHelper.currentLevel = currentLevel; 
 
         Debug.Log("End Game"); 
-        endGameObjects.ForEach(obj => obj.SetActive(true));
+        //endGameObjects.ForEach(obj => obj.SetActive(true));
 
         foreach (var obj in endGameObjects)
         {
             obj.SetActive(true);
         //    obj.transform.localScale = Vector3.zero;
             obj.transform.DOScale(0, .2f).From().SetEase(Ease.OutBack);
-            SaveManager.Instance.SaveLastLevel(currentLevel);
         }
+        
+        SaveManager.Instance.SaveLastLevel(currentLevel);
 
         StartCoroutine(RestartGame(7f)); // REINICIA O JOGO APÓS 7 SEGUNDOS
 
     }
 
 
-        private IEnumerator RestartGame(float delay)
-        {
-            // espera o tempo definido
-            yield return new WaitForSeconds(delay);
+    private IEnumerator RestartGame(float delay)
+    {
+        // espera o tempo definido
+        yield return new WaitForSeconds(delay);
 
-            Debug.Log("coroutine funcionou");
-            //loadSceneHelper.Load(loadSceneHelper.GetActiveScene().name);
-            loadSceneHelper.LoadNext(); // REINICIA O JOGO CARREGANDO A CENA 0 (MENU)
-        }
+        Debug.Log("coroutine funcionou");
+        //loadSceneHelper.Load(loadSceneHelper.GetActiveScene().name);
+        loadSceneHelper.Load(0);    // manda devolta pro meu
+    }
 
 
 }

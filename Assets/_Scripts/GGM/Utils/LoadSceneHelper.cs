@@ -15,20 +15,35 @@ public class LoadSceneHelper : MonoBehaviour
 
     public void Load(int i)
     {
-        SceneManager.LoadScene(i);
-        Time.timeScale = 1f;    // REINICI O TIME SCALE PARA 1 AO CARREGAR CENA
-    }
-    public void LoadNext()
-    {
-        if(SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
+        if(i < SceneManager.sceneCountInBuildSettings)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            Debug.Log(SceneManager.GetActiveScene().buildIndex);
-            //return;
+            SceneManager.LoadScene(i);
         }
         else
         {
             SceneManager.LoadScene(0);
+        }
+        //SceneManager.LoadScene(i);
+        Time.timeScale = 1f;    // REINICI O TIME SCALE PARA 1 AO CARREGAR CENA
+    }
+
+    public void LoadNext()
+    {
+        int nextLevel = SaveManager.Instance.GetLastLevel() + 1;
+        Debug.Log("next level é: " + nextLevel);
+
+        if(nextLevel < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextLevel);
+            Debug.Log("LSH diz: scenecountinbuildsettings é igual " + SceneManager.sceneCountInBuildSettings);
+            //return;
+        }
+        else
+        {
+            Debug.Log("LOADSCENEHELPER carregou menu");
+            SceneManager.LoadScene(1);
+            Debug.Log("LSH diz: scenecountinbuildsettings é igual " + SceneManager.sceneCountInBuildSettings);
+
         }
         Time.timeScale = 1f;    // REINICI O TIME SCALE PARA 1 AO CARREGAR CENA
     }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class PlayLevel : MonoBehaviour
 {
@@ -18,7 +20,19 @@ public class PlayLevel : MonoBehaviour
     void Start()
     {
         SaveManager.Instance.FileLoaded += OnLoad;  
-        currentLevel = loadSceneHelper.currentLevel;  
+        //currentLevel = loadSceneHelper.currentLevel;  
+    }
+
+    void Update()
+    {
+        if(loadSceneHelper.currentLevel <  SceneManager.sceneCountInBuildSettings - 1)
+        {
+            uiTextName.text = "Play Next: \n  level " + (loadSceneHelper.currentLevel + 1);
+        }
+        else
+        {
+            uiTextName.text = "Play level 1";
+        }
     }
 
     public void PlayNextLevel()
@@ -28,7 +42,7 @@ public class PlayLevel : MonoBehaviour
 
     public void OnLoad(SaveSetup saveSetup)
     {
-        uiTextName.text = "Play Next \n  level " + (currentLevel + 1);
+        uiTextName.text = "Play Next: \n level " + (loadSceneHelper.currentLevel + 1);
     }
 
     private void OnDestroy()

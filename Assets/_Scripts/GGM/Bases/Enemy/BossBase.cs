@@ -185,7 +185,7 @@ namespace Boss
             yield return new WaitForSeconds(delay);
 
             Debug.Log("coroutine funcionou");
-            loadSceneHelper.Load(loadSceneHelper.GetActiveScene().name);
+           //loadSceneHelper.Load(loadSceneHelper.GetActiveScene().name);
         }
 
         public void StartDeathAnimation()
