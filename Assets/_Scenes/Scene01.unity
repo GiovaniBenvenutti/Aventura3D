@@ -2684,7 +2684,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497963735}
-  m_LocalRotation: {x: 0.098706335, y: -0.7374569, z: 0.11046661, w: 0.65894735}
+  m_LocalRotation: {x: 0.09870634, y: -0.7374569, z: 0.11046661, w: 0.65894735}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3547,8 +3547,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730271407}
-  m_LocalRotation: {x: 0.15308413, y: -0.7257368, z: 0.1713232, w: 0.64847493}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0000038146973}
+  m_LocalRotation: {x: 0.15308413, y: -0.7257368, z: 0.17132318, w: 0.64847493}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2048299198}
@@ -4384,7 +4384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953146376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 758.8, y: -63.2, z: 62}
+  m_LocalPosition: {x: 752.2, y: -66.7, z: 62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1910420636}
@@ -4470,7 +4470,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.19851027, y: 0.49908194, z: -0.1186321, w: 0.8351272}
+  m_LocalRotation: {x: 0.19851027, y: 0.49908194, z: -0.11863209, w: 0.8351272}
   m_LocalPosition: {x: -227.13498, y: 18.599998, z: -14.880676}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5076,7 +5076,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025874875}
-  m_LocalRotation: {x: 0.19851027, y: 0.49908194, z: -0.1186321, w: 0.8351272}
+  m_LocalRotation: {x: 0.19851027, y: 0.49908194, z: -0.11863209, w: 0.8351272}
   m_LocalPosition: {x: -229.3583, y: 16.44696, z: -13.049004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -25406,11 +25406,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastCheckPointKey: 0
   checkPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 63059571}
+  - {fileID: 79131422}
+  - {fileID: 444108417}
+  - {fileID: 1452532342}
+  - {fileID: 2009995908}
 --- !u!1 &7183099222080218904
 GameObject:
   m_ObjectHideFlags: 0

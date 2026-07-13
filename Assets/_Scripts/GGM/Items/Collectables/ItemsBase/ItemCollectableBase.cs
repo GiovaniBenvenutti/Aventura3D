@@ -18,7 +18,7 @@ namespace GGM.Item
         public new ParticleSystem particleSystem;
         public AudioSource audioSource;
 
-        private void OnValidate() 
+        private void Awake() 
         {
             collider = GetComponent<Collider>();    
         }
@@ -33,6 +33,8 @@ namespace GGM.Item
 
         protected virtual void Collect() // o que acontece quando o item é coletado
         {
+            ItemsManager.Instance.AddByType(itemType);
+            
             if(collider != null) collider.enabled = false;
             if(graficItem != null) graficItem.SetActive(false);
             Invoke("HideObject", timeToHide);
@@ -62,7 +64,6 @@ namespace GGM.Item
                 Destroy(newAudio.gameObject, newAudio.clip.length); // limpa depois que terminar de tocar
             }
         
-            ItemsManager.Instance.AddByType(itemType);
         
         }
     }

@@ -84,7 +84,8 @@ public class SaveManager : Singleton<SaveManager>
     {
         _saveSetup.lastLevel = lastLevel;
         this.lastLevel = lastLevel;
-        //SaveItems();
+        SaveItems();
+        
         Save();
     }
     public void SaveNewCheckPointIndex(int newCheckPointIndex)
@@ -124,6 +125,7 @@ public class SaveManager : Singleton<SaveManager>
             fileLoaded = File.ReadAllText(_path);
             _saveSetup = JsonUtility.FromJson<SaveSetup>(fileLoaded);
             lastLevel = _saveSetup.lastLevel;
+            Debug.Log("Save file found." + _saveSetup);
         }
         else
         {
@@ -137,7 +139,7 @@ public class SaveManager : Singleton<SaveManager>
     public int GetLastLevel()
     {
         Load();
-        Debug.Log("savemanager diz que lastlevel é: " + lastLevel);
+//        Debug.Log("savemanager diz que lastlevel é: " + lastLevel);
         //return _saveSetup.lastLevel;
         return lastLevel;
     }

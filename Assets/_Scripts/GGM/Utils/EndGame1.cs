@@ -19,6 +19,7 @@ public class EndGame1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadSceneHelper loadSceneHelper = FindObjectOfType<LoadSceneHelper>();
         endGameObjects.ForEach(obj => obj.SetActive(false));
         currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
@@ -43,10 +44,11 @@ public class EndGame1 : MonoBehaviour
     {
         _isEndGame = true;
 
-        LoadSceneHelper loadSceneHelper = FindObjectOfType<LoadSceneHelper>();
         loadSceneHelper.currentLevel = currentLevel; 
 
-        Debug.Log("End Game"); 
+        SaveManager.Instance.SaveLastLevel(currentLevel);
+
+  //      Debug.Log("End Game"); 
         //endGameObjects.ForEach(obj => obj.SetActive(true));
 
         foreach (var obj in endGameObjects)
@@ -56,7 +58,6 @@ public class EndGame1 : MonoBehaviour
             obj.transform.DOScale(0, .2f).From().SetEase(Ease.OutBack);
         }
         
-        SaveManager.Instance.SaveLastLevel(currentLevel);
 
         StartCoroutine(RestartGame(7f)); // REINICIA O JOGO APÓS 7 SEGUNDOS
 
@@ -68,7 +69,7 @@ public class EndGame1 : MonoBehaviour
         // espera o tempo definido
         yield return new WaitForSeconds(delay);
 
-        Debug.Log("coroutine funcionou");
+//        Debug.Log("coroutine funcionou");
         //loadSceneHelper.Load(loadSceneHelper.GetActiveScene().name);
         loadSceneHelper.Load(0);    // manda devolta pro meu
     }

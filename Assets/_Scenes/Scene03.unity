@@ -2166,11 +2166,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastCheckPointKey: 0
   checkPoints:
+  - {fileID: 63059571}
   - {fileID: 79131422}
   - {fileID: 444108417}
-  - {fileID: 2009995908}
-  - {fileID: 63059571}
   - {fileID: 1452532342}
+  - {fileID: 2009995908}
 --- !u!4 &389287669
 Transform:
   m_ObjectHideFlags: 0

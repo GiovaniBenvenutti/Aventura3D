@@ -34,7 +34,7 @@ namespace GGM.Item
         void Start()
         {
             ReSet();
-            LoadItemsFromSave();
+            Invoke(nameof(LoadItemsFromSave), .2f);
         }
 
         private void LoadItemsFromSave()
@@ -59,8 +59,9 @@ namespace GGM.Item
         }
 
         // Update is called once per frame
-        public void AddByType(ItemType itemType, int amount = 0)
+        public void AddByType(ItemType itemType, int amount = 1)
         {
+            Debug.Log("addbytype foi chamado em item manager");
             var item = itemSetups.Find(i => i.itemType == itemType);
             item.soIntString.intValue += amount;
             if(item.soIntString.intValue < 0) item.soIntString.intValue = 0;  
