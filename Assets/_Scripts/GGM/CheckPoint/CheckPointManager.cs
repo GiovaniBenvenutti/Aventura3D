@@ -14,8 +14,8 @@ public class CheckPointManager : Singleton<CheckPointManager>
     {
         base.Awake();
         SceneManager.sceneLoaded += OnSceneLoaded;
-        lastCheckPointKey = SaveManager.Instance.GetLastCheckPoint();
-
+        //lastCheckPointKey = SaveManager.Instance.GetLastCheckPoint();
+        checkPoints = new List<CheckPointBase>(FindObjectsOfType<CheckPointBase>());
     }
 
     void Start()
@@ -25,7 +25,7 @@ public class CheckPointManager : Singleton<CheckPointManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        checkPoints = new List<CheckPointBase>(FindObjectsOfType<CheckPointBase>());
+       // checkPoints = new List<CheckPointBase>(FindObjectsOfType<CheckPointBase>());
     }
 
     void OnDestroy()
@@ -41,7 +41,6 @@ public class CheckPointManager : Singleton<CheckPointManager>
     public void saveCheckPoint(int key)
     {
         if (key > lastCheckPointKey) lastCheckPointKey = key;
-        //lastCheckPointKey = key;
         SaveManager.Instance.SaveNewCheckPointIndex(lastCheckPointKey);
     }
 
