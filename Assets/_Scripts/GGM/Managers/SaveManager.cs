@@ -158,6 +158,7 @@ public class SaveManager : Singleton<SaveManager>
     public int GetLastCheckPoint()
     {
         Load();
+        currentCheckPoint = _saveSetup.newCheckPointIndex;
         Debug.Log("save manager.getLastCheckPoint diz new checkpoint = " + _saveSetup.newCheckPointIndex.ToString()); // mudei pra new check point pra testar
         return _saveSetup.newCheckPointIndex;
     }
