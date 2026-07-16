@@ -135,6 +135,7 @@ public class SaveManager : Singleton<SaveManager>
             fileLoaded = File.ReadAllText(_path);
             _saveSetup = JsonUtility.FromJson<SaveSetup>(fileLoaded);
             lastLevel = _saveSetup.lastLevel;
+            currentCheckPoint = _saveSetup.newCheckPointIndex;
 //            Debug.Log("Save file found." + _saveSetup);
         }
         else
