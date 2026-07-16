@@ -17,6 +17,8 @@ public class SaveManager : Singleton<SaveManager>
 
     public int lastLevel;
 
+    public int currentCheckPoint;
+
     public SaveSetup setup
     {
         get { return _saveSetup; }
@@ -95,6 +97,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SaveNewCheckPointIndex(int newCheckPointIndex)
     {
+        this.currentCheckPoint = newCheckPointIndex;
         _saveSetup.lastCheckPointIndex = _saveSetup.newCheckPointIndex;
         _saveSetup.newCheckPointIndex = newCheckPointIndex;
         Debug.Log("save new check point index chamou o save");
