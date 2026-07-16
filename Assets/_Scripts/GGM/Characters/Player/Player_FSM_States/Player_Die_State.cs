@@ -18,7 +18,7 @@ public class Player_Die_State : PlayerBaseState
         spc = player.GetComponent<Player>();
         animator = spc.animator; // usa o animator do controler para garantir consistência
 
-        Debug.Log("Enter State: DIE");
+      //  Debug.Log("Enter State: DIE");
 
         // zera velocidade vertical e horizontal
         spc._vSpeed = 0f;
@@ -35,7 +35,7 @@ public class Player_Die_State : PlayerBaseState
 
     public override void OnStateStay(PlayerStateManager player)
     {
-        Debug.Log("Stay in State: DIE");
+       // Debug.Log("Stay in State: DIE");
 
         // impede qualquer movimento
         spc.characterController.Move(Vector3.zero);
@@ -44,7 +44,7 @@ public class Player_Die_State : PlayerBaseState
 
     public override void OnStateExit(PlayerStateManager player)
     {
-        Debug.Log("Exit State: DIE");
+       // Debug.Log("Exit State: DIE");
         // normalmente não sai do estado de morte, mas se sair, pode resetar flags
         spc.isDead = false;
     }

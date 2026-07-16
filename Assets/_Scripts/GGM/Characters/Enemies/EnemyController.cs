@@ -183,7 +183,7 @@ public class EnemyController : MonoBehaviour
         var oldSpeed = moveSpeed;
         moveSpeed = 2f; // para o inimigo enquanto atira
 
-        Debug.Log("Inimigo iniciou ataque de tiro!");
+//        Debug.Log("Inimigo iniciou ataque de tiro!");
 
 
         if (projectilePrefab != null && shootPoint != null)

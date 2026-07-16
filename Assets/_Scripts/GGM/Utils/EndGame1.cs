@@ -19,7 +19,7 @@ public class EndGame1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadSceneHelper loadSceneHelper = FindObjectOfType<LoadSceneHelper>();
+        loadSceneHelper = FindObjectOfType<LoadSceneHelper>();
         endGameObjects.ForEach(obj => obj.SetActive(false));
         currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
@@ -46,7 +46,9 @@ public class EndGame1 : MonoBehaviour
 
         loadSceneHelper.currentLevel = currentLevel; 
 
-        SaveManager.Instance.SaveLastLevel(currentLevel);
+       // CheckPointManager.Instance.ResetCheckPoint();
+        SaveManager.Instance.SaveNewCheckPointIndex(1);
+        SaveManager.Instance.SaveLastLevel(currentLevel + 1 );
 
   //      Debug.Log("End Game"); 
         //endGameObjects.ForEach(obj => obj.SetActive(true));
@@ -71,7 +73,7 @@ public class EndGame1 : MonoBehaviour
 
 //        Debug.Log("coroutine funcionou");
         //loadSceneHelper.Load(loadSceneHelper.GetActiveScene().name);
-        loadSceneHelper.Load(0);    // manda devolta pro meu
+        loadSceneHelper.Load(0);    // manda devolta pro menu
     }
 
 

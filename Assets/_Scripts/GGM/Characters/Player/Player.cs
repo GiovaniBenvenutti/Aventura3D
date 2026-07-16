@@ -8,6 +8,8 @@ using GGM.Cloth;
 
 public class Player : Singleton<Player>
 {
+    public LoadSceneHelper loadSceneHelper;
+
     public List<Collider> colliders;
     PlayerStateManager playerStateManager;
 
@@ -15,6 +17,7 @@ public class Player : Singleton<Player>
     public CharacterController characterController;
     public Animator animator;
     public FSM_Player fsmPlayer;
+
 
     [Foldout("Moviment Setup")] public float speed = 1f;
     [Foldout("Moviment Setup")] public float turnSpeed = 1f;
@@ -37,7 +40,7 @@ public class Player : Singleton<Player>
     [Foldout("LIfe Setup")] public bool isDead = false;
     [Foldout("LIfe Setup")] public HealthBase health;
     [Foldout("LIfe Setup")] public float damageCooldown = 1f; // intervalo em segundos
-    [Foldout("LIfe Setup")] public Vector3 respawnOffSet = new Vector3(1,0,1);
+    [Foldout("LIfe Setup")] public Vector3 respawnOffSet = new Vector3(1,5,1);
     [Foldout("LIfe Setup")] public ScreenShake shake;
 
     [Space]
@@ -49,24 +52,24 @@ public class Player : Singleton<Player>
     
 
 
-    void OnValidate()
-    {
-        if (characterController == null) characterController = GetComponent<CharacterController>();
-        if (animator == null) animator = GetComponent<Animator>();
-        if (animatorManager == null) animatorManager = GetComponent<AnimatorManager>();
-        if (health == null) health = GetComponent<HealthBase>();
-        if (shake == null) shake = GetComponent<ScreenShake>();
-    }
+    // void OnValidate()
+    // {
+    // }
 
     protected override void Awake()
     {
         base.Awake();
         //OnValidate();   // garante que as referências estejam setadas mesmo no editor
+        if (characterController == null) characterController = GetComponent<CharacterController>();
+        if (animator == null) animator = GetComponent<Animator>();
+        if (animatorManager == null) animatorManager = GetComponent<AnimatorManager>();
+        if (health == null) health = GetComponent<HealthBase>();
+        if (shake == null) shake = GetComponent<ScreenShake>();
         playerStateManager = GetComponent<PlayerStateManager>();
         characterController = GetComponent<CharacterController>();
+        loadSceneHelper = FindObjectOfType<LoadSceneHelper>();
+
         //_clothChanger = GetComponent<ClothChanger>();
-        //animator = GetComponent<Animator>();
-        //animatorManager = GetComponent<AnimatorManager>();
 
         health.OnDamage += Damage;
         health.OnKill += OnKill;
@@ -78,6 +81,8 @@ public class Player : Singleton<Player>
         characterController.minMoveDistance = 0.0f;
         characterController.skinWidth = 0.0001f;
         //fsmPlayer = new FSM_Player(this);
+        SaveManager.Instance.GetLastCheckPoint();
+        Invoke(nameof(Spawn), 0.1f);
     }
 
     void Update()
@@ -107,8 +112,6 @@ public class Player : Singleton<Player>
         {
             playerStateManager.SwitchState(playerStateManager.runState);
         }
-
-        
 
         // aplica gravidade sempre
         _vSpeed -= gravity * Time.deltaTime;
@@ -144,13 +147,13 @@ public class Player : Singleton<Player>
         {
             if(!isDead)
             {
-                Debug.Log("Morreu");
+       //         Debug.Log("Morreu");
                 isDead = true;
                 playerStateManager.SwitchState(playerStateManager.dieState);
                 //animator.SetTrigger("dead");
                 colliders.ForEach(col => col.enabled = false);
 
-                Invoke(nameof(Revive), 4f);
+               Invoke(nameof(Revive), 3f);
             }
         }
 
@@ -184,9 +187,7 @@ public class Player : Singleton<Player>
 
     #endregion
 
-
-    [NaughtyAttributes.Button]
-    public void Respawn()
+    public void Spawn()
     {
         if(CheckPointManager.Instance.hasCheckPoint())
         {
@@ -194,7 +195,19 @@ public class Player : Singleton<Player>
             replace += respawnOffSet;
             transform.position = replace;
             playerStateManager.SwitchState(playerStateManager.idleState);
+        }
+    }
 
+    [NaughtyAttributes.Button]
+    public void Respawn()
+    {
+        if(CheckPointManager.Instance.hasCheckPoint())
+        {
+         //   Vector3 replace = CheckPointManager.Instance.GetPositionFromLastCheckPoint();
+         //   replace += respawnOffSet;
+         //   transform.position = replace;
+         //   playerStateManager.SwitchState(playerStateManager.idleState);
+            loadSceneHelper.Load(0);    // manda devolta pro menu
         }
     }
 

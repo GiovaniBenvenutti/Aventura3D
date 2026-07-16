@@ -44,7 +44,7 @@ namespace GGM.Item
             AddByType(ItemType.AIR_DROP, (int)SaveManager.Instance.setup.airDrop);
         }
 
-        private void ReSet()
+        public void ReSet()
         {
             foreach(var i in itemSetups)
             {
@@ -61,7 +61,7 @@ namespace GGM.Item
         // Update is called once per frame
         public void AddByType(ItemType itemType, int amount = 1)
         {
-            Debug.Log("addbytype foi chamado em item manager");
+//            Debug.Log("addbytype foi chamado em item manager");
             var item = itemSetups.Find(i => i.itemType == itemType);
             item.soIntString.intValue += amount;
             if(item.soIntString.intValue < 0) item.soIntString.intValue = 0;  

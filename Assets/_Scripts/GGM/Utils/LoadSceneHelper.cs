@@ -11,6 +11,7 @@ public class LoadSceneHelper : MonoBehaviour
     void Start()
     {
         currentLevel = SceneManager.GetActiveScene().buildIndex;
+        CheckPointManager.Instance.lastCheckPointKey = SaveManager.Instance.GetLastCheckPoint();
     }
 
     public void Load(int i)
@@ -29,7 +30,7 @@ public class LoadSceneHelper : MonoBehaviour
 
     public void LoadNext()
     {
-        int nextLevel = SaveManager.Instance.GetLastLevel() + 1;
+        int nextLevel = SaveManager.Instance.GetLastLevel(); // +1 para realmente ir pro proximo
 //        Debug.Log("next level é: " + nextLevel);
 
         if(nextLevel < SceneManager.sceneCountInBuildSettings)
@@ -40,7 +41,7 @@ public class LoadSceneHelper : MonoBehaviour
         }
         else
         {
-            Debug.Log("LOADSCENEHELPER carregou menu");
+            Debug.Log("LOADSCENEHELPER carregou primeira fase");
             SceneManager.LoadScene(1);
 //            Debug.Log("LSH diz: scenecountinbuildsettings é igual " + SceneManager.sceneCountInBuildSettings);
 

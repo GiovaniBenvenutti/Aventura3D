@@ -7,7 +7,7 @@ public class KillZone : MonoBehaviour
 {
     public new BoxCollider collider;
 
-    void OnValidate()
+    void Awake()
     {
         // garante que sempre terá referência ao BoxCollider
         collider = GetComponent<BoxCollider>();

@@ -22,7 +22,7 @@ public class ProjectileBase3D : MonoBehaviour
     {
         if (!collision.gameObject.GetComponent<ProjectileBase3D>())
         {
-            Debug.Log($"Projectile collided with {collision.gameObject.name}");
+//            Debug.Log($"Projectile collided with {collision.gameObject.name}");
             var damageable = collision.transform.GetComponent<IDamageable>();
 
             if (damageable != null) 

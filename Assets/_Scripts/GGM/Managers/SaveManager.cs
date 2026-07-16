@@ -40,15 +40,16 @@ public class SaveManager : Singleton<SaveManager>
         _saveSetup.playerName = "Player1";
         _saveSetup.currentCloth = 0;
 
-        _saveSetup.lastLevel = 0;
+        _saveSetup.lastLevel = 1;
 
         _saveSetup.lastCheckPointIndex = 0;
-        _saveSetup.newCheckPointIndex = 0;
+        _saveSetup.newCheckPointIndex = 1;
 
         _saveSetup.health = 0;
         _saveSetup.coins = 0;
         _saveSetup.airDrop = 0;
 
+        Debug.Log("create new save chamou o save");
         Save();
     }
 
@@ -58,25 +59,27 @@ public class SaveManager : Singleton<SaveManager>
     private void Save()
     {
         string setupToJson = JsonUtility.ToJson(_saveSetup, true);
-        Debug.Log(setupToJson);
+        //Debug.Log(setupToJson);
         SaveFile(setupToJson);
     }
     
     private void SaveFile(string json)
     {   // string path = Application.dataPath + "/save.txt"; string path = Application.persistentDataPath + "/save.txt"; string path = Application.streamingAssetsPath + "/save.txt";
-        Debug.Log(_path);
+  //      Debug.Log(_path);
         File.WriteAllText(_path, json);
     }
 
     public void SavePlayerName(string playerName)
     {
         _saveSetup.playerName = playerName;
+        Debug.Log("save player name chamou o save");
         Save();
     }
     
     public void SavePlayerCloth(int currentCloth)
     {
         _saveSetup.currentCloth = currentCloth;
+        Debug.Log("save player cloth chamou o save");
         Save();
     }
 
@@ -85,13 +88,16 @@ public class SaveManager : Singleton<SaveManager>
         _saveSetup.lastLevel = lastLevel;
         this.lastLevel = lastLevel;
         SaveItems();
-        
+
+        Debug.Log("save last level chamou o save");
         Save();
     }
+
     public void SaveNewCheckPointIndex(int newCheckPointIndex)
     {
         _saveSetup.lastCheckPointIndex = _saveSetup.newCheckPointIndex;
         _saveSetup.newCheckPointIndex = newCheckPointIndex;
+        Debug.Log("save new check point index chamou o save");
         Save();
     }
 
@@ -100,6 +106,7 @@ public class SaveManager : Singleton<SaveManager>
         _saveSetup.coins = ItemsManager.Instance.GetItemByType(ItemType.COIN).soIntString.intValue;
         _saveSetup.health = ItemsManager.Instance.GetItemByType(ItemType.LIFE_PACK).soIntString.intValue;
         _saveSetup.airDrop = ItemsManager.Instance.GetItemByType(ItemType.AIR_DROP).soIntString.intValue;
+        Debug.Log("save items chamou o save");
         Save();
     }
 
@@ -125,7 +132,7 @@ public class SaveManager : Singleton<SaveManager>
             fileLoaded = File.ReadAllText(_path);
             _saveSetup = JsonUtility.FromJson<SaveSetup>(fileLoaded);
             lastLevel = _saveSetup.lastLevel;
-            Debug.Log("Save file found." + _saveSetup);
+//            Debug.Log("Save file found." + _saveSetup);
         }
         else
         {
@@ -139,9 +146,16 @@ public class SaveManager : Singleton<SaveManager>
     public int GetLastLevel()
     {
         Load();
-//        Debug.Log("savemanager diz que lastlevel é: " + lastLevel);
-        //return _saveSetup.lastLevel;
-        return lastLevel;
+        Debug.Log("savemanager diz que lastlevel é: " + lastLevel);
+        return _saveSetup.lastLevel;
+        //return lastLevel;
+    }
+
+    public int GetLastCheckPoint()
+    {
+        Load();
+        Debug.Log("save manager.getLastCheckPoint diz new checkpoint = " + _saveSetup.newCheckPointIndex.ToString()); // mudei pra new check point pra testar
+        return _saveSetup.newCheckPointIndex;
     }
 
 
@@ -159,7 +173,7 @@ public class SaveSetup
     public int lastCheckPointIndex;
     public int newCheckPointIndex;
 
-    public float health;
     public float coins;
+    public float health;
     public float airDrop;
 }

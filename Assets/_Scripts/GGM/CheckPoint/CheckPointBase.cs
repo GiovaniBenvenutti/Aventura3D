@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class CheckPointBase : MonoBehaviour
 {
@@ -10,19 +12,23 @@ public class CheckPointBase : MonoBehaviour
     public int materialNumber = 0;
     public SphereCollider sphereCollider;
 
-    public int key = 01;
+    public int key = 0;
 
-    private string checkPointKey = "CheckPoint";
+  //  private string checkPointKey = "CheckPoint";
 
     private bool checkPointActive = false;
+
+    public int currentLevel;
 
     void Start()
     {
         Material[] materials = meshRenderer.materials;
         lightMaterial = materials[materialNumber];
 
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
 
-        checkPointKey = "CheckPoint_" + key.ToString();
+
+      //  checkPointKey = "CheckPoint_" + key.ToString();
 
         if(lightMaterial != null)
         {
@@ -34,7 +40,7 @@ public class CheckPointBase : MonoBehaviour
     {
         if(!checkPointActive && other.CompareTag("Player"))
         {
-            Debug.Log("Checkpoint ativado");
+            Debug.Log("Checkpoint ativado : " + key);
             CheckCheckPint();
         }
     }
@@ -43,6 +49,8 @@ public class CheckPointBase : MonoBehaviour
     {
         SaveCheckPoint();
         TurnItOn();
+        SaveManager.Instance.SaveLastLevel(currentLevel);
+
     }
 
     [NaughtyAttributes.Button]

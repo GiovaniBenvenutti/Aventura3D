@@ -32,7 +32,7 @@ public class FlashColor3D : MonoBehaviour
     [NaughtyAttributes.Button]
     public void Flash()
     {
-        Debug.Log("Flash");
+//        Debug.Log("Flash");
         if (meshRenderer != null && !_currentTween.IsActive())
             _currentTween = meshRenderer.material.DOColor(flashColor, collorParameterName, flashDuration).SetLoops(2, LoopType.Yoyo);
 

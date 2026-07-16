@@ -17,7 +17,7 @@ public class Player_Run_State : PlayerBaseState
     {
         spc = player.GetComponent<Player>();
         animator = spc.animator; // usa o animator do controler para garantir consistência
-        Debug.Log("Enter State: RUN");
+ //       Debug.Log("Enter State: RUN");
         animator.SetTrigger("isRunning");
         animator.speed = 1.3f; // acelera só a animação
     }
@@ -43,7 +43,7 @@ public class Player_Run_State : PlayerBaseState
 
     public override void OnStateExit(PlayerStateManager player)
     {
-        Debug.Log("Exit State: RUN");
+//        Debug.Log("Exit State: RUN");
         animator.speed = 1f; 
     }
 

@@ -60,7 +60,7 @@ public class HealthBase : MonoBehaviour, IDamageable
         UpDateUI();
         OnDamage?.Invoke(this);
 
-        Debug.Log("Sofreu dano");
+//        Debug.Log("Sofreu dano");
 
         if(_currentLife <= 0)
         {

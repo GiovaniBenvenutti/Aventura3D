@@ -14,6 +14,13 @@ public class CheckPointManager : Singleton<CheckPointManager>
     {
         base.Awake();
         SceneManager.sceneLoaded += OnSceneLoaded;
+        lastCheckPointKey = SaveManager.Instance.GetLastCheckPoint();
+
+    }
+
+    void Start()
+    {
+        lastCheckPointKey = SaveManager.Instance.GetLastCheckPoint();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -34,13 +41,21 @@ public class CheckPointManager : Singleton<CheckPointManager>
     public void saveCheckPoint(int key)
     {
         if (key > lastCheckPointKey) lastCheckPointKey = key;
+        //lastCheckPointKey = key;
+        SaveManager.Instance.SaveNewCheckPointIndex(lastCheckPointKey);
+    }
+
+    public void ResetCheckPoint()
+    {
+        SaveManager.Instance.SaveNewCheckPointIndex(1);        
     }
 
     public Vector3 GetPositionFromLastCheckPoint()
     {
-
+        lastCheckPointKey = SaveManager.Instance.GetLastCheckPoint();
         CheckPointBase checkPoint = checkPoints.Find(cp => cp.key == lastCheckPointKey);
-        return checkPoint != null ? checkPoint.transform.position : Vector3.zero;
-
+        Debug.Log("checkpointmanager diz lastcheckpoint é " + lastCheckPointKey);
+        return checkPoint.transform.position;
+       // return checkPoint != null ? checkPoint.transform.position : Vector3.zero;
     }
 }
