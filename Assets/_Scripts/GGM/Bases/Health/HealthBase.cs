@@ -33,10 +33,16 @@ public class HealthBase : MonoBehaviour, IDamageable
         uiUpdaters = FindObjectsOfType<UiHealthUpdater>().ToList();
     }
 
+    // void Start()
+    // {
+    //     UpDateUI();
+    // }
+
     private void Init()
     {
         _isDead = false;
         _currentLife = startLife;
+        if(isPlayer) _currentLife = SaveManager.Instance.GetHealthValue();
         UpDateUI();
     }
 

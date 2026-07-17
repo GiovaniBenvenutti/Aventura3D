@@ -36,6 +36,8 @@ public class EndGame1 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ShowEndGame();
+            SaveManager.Instance.SavePlayerHealth(other.GetComponent<HealthBase>()._currentLife);
+            
         }
     }
 
@@ -45,6 +47,7 @@ public class EndGame1 : MonoBehaviour
         _isEndGame = true;
 
         loadSceneHelper.currentLevel = currentLevel; 
+
 
        // CheckPointManager.Instance.ResetCheckPoint();
         SaveManager.Instance.SaveNewCheckPointIndex(1);

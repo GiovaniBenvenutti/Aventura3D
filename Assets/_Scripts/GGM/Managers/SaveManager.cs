@@ -40,6 +40,7 @@ public class SaveManager : Singleton<SaveManager>
         _saveSetup = new SaveSetup();
 
         _saveSetup.playerName = "Player1";
+        _saveSetup.healthValue = 30;
         _saveSetup.currentCloth = 0;
 
         _saveSetup.lastLevel = 1;
@@ -75,6 +76,13 @@ public class SaveManager : Singleton<SaveManager>
     {
         _saveSetup.playerName = playerName;
         Debug.Log("save player name chamou o save");
+        Save();
+    }
+
+    public void SavePlayerHealth(float playerHealth)
+    {
+        _saveSetup.healthValue = playerHealth;
+        Debug.Log("savePlauerHealth salvou o valor: " + playerHealth);
         Save();
     }
     
@@ -147,6 +155,14 @@ public class SaveManager : Singleton<SaveManager>
         FileLoaded?.Invoke(_saveSetup);
     }
 
+    public float GetHealthValue()
+    {
+        Load();
+        Debug.Log("savemanager diz que lastlevel é: " + _saveSetup.healthValue);
+        return _saveSetup.healthValue;
+        
+    }
+
     public int GetLastLevel()
     {
         Load();
@@ -172,6 +188,8 @@ public class SaveManager : Singleton<SaveManager>
 public class SaveSetup
 {
     public string playerName;
+    public float healthValue;
+
     public int currentCloth;
 
     public int lastLevel;

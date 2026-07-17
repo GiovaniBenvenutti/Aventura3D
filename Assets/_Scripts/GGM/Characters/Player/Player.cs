@@ -133,6 +133,7 @@ public class Player : Singleton<Player>
             flashColors.ForEach(f => f.Flash());
             EffectsManager.Instance.ChangeVignette();
             shake.ShakeTeste();
+           // SaveManager.Instance.SavePlayerHealth(health._currentLife);
         }
 
         public void Damage(float damage, Vector3 direction)
@@ -191,10 +192,15 @@ public class Player : Singleton<Player>
     {
         if(CheckPointManager.Instance.hasCheckPoint())
         {
+            health._currentLife = SaveManager.Instance.GetHealthValue();
             Vector3 replace = CheckPointManager.Instance.GetPositionFromLastCheckPoint();
             replace += respawnOffSet;
             transform.position = replace;
             playerStateManager.SwitchState(playerStateManager.idleState);
+        }
+        else
+        {
+            Debug.Log("check point não encontrado em player.spaw");
         }
     }
 
@@ -207,6 +213,7 @@ public class Player : Singleton<Player>
          //   transform.position = replace;
          //   playerStateManager.SwitchState(playerStateManager.idleState);
             SaveManager.Instance.GetLastCheckPoint();
+            health._currentLife = SaveManager.Instance.GetHealthValue();
 
             loadSceneHelper.Load(0);    // manda devolta pro menu
         }

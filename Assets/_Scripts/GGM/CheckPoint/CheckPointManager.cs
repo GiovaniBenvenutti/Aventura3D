@@ -6,7 +6,7 @@ using GGM.Singleton;
 
 public class CheckPointManager : Singleton<CheckPointManager>
 {
-    public int lastCheckPointKey = 0;
+    public int lastCheckPointKey = 1;
 
     public List<CheckPointBase> checkPoints;
 
