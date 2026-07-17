@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+//using NaughtyAttributes;
 using DG.Tweening;
 
 
@@ -40,7 +40,7 @@ namespace Screens
             if(!isActive) HideObjects();
         }
 
-        [Button("Show Screen")]     // Botão para mostrar a tela no editor gerado pelo NaughtyAttributes
+     //   [Button("Show Screen")]     // Botão para mostrar a tela no editor gerado pelo NaughtyAttributes
         public virtual void Show()
         {
             ShowObjects();
@@ -49,7 +49,7 @@ namespace Screens
             Debug.Log("Showing screen: " + screenType.ToString());
         }
 
-        [Button("Hide Screen")]
+     //   [Button("Hide Screen")]
         public virtual void Hide()
         {
             HideObjects();

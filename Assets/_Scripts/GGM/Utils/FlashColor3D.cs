@@ -29,7 +29,7 @@ public class FlashColor3D : MonoBehaviour
     //     _defaultColor = meshRenderer.material.GetColor("_EmissionColor");
     // }
 
-    [NaughtyAttributes.Button]
+  //  [NaughtyAttributes.Button]
     public void Flash()
     {
 //        Debug.Log("Flash");

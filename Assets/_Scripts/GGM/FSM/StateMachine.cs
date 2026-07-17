@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //using UnityEditor;
-using NaughtyAttributes;
+//using NaughtyAttributes;
 using System;
 
 namespace GGM.FSM

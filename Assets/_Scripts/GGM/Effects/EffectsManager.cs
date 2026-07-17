@@ -15,7 +15,7 @@ public class EffectsManager : Singleton<EffectsManager>
     public float originalIntensity = 0.35f;
 
 
-    [NaughtyAttributes.Button]
+  //  [NaughtyAttributes.Button]
     public void ChangeVignette()
     {
         StartCoroutine(FlashColorVignette());

@@ -15,17 +15,17 @@ public class CheckPointManager : Singleton<CheckPointManager>
         base.Awake();
         SceneManager.sceneLoaded += OnSceneLoaded;
         //lastCheckPointKey = SaveManager.Instance.GetLastCheckPoint();
-        checkPoints = new List<CheckPointBase>(FindObjectsOfType<CheckPointBase>());
     }
 
     void Start()
     {
+        //checkPoints = new List<CheckPointBase>(FindObjectsOfType<CheckPointBase>());
         lastCheckPointKey = SaveManager.Instance.GetLastCheckPoint();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-       // checkPoints = new List<CheckPointBase>(FindObjectsOfType<CheckPointBase>());
+        checkPoints = new List<CheckPointBase>(FindObjectsOfType<CheckPointBase>());
     }
 
     void OnDestroy()
@@ -51,7 +51,7 @@ public class CheckPointManager : Singleton<CheckPointManager>
 
     public Vector3 GetPositionFromLastCheckPoint()
     {
-        lastCheckPointKey = SaveManager.Instance.GetLastCheckPoint();
+        lastCheckPointKey = SaveManager.Instance.currentCheckPoint;
         CheckPointBase checkPoint = checkPoints.Find(cp => cp.key == lastCheckPointKey);
         Debug.Log("checkpointmanager diz lastcheckpoint é " + lastCheckPointKey);
         return checkPoint.transform.position;

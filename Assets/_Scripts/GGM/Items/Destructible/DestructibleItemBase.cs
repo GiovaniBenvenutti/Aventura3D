@@ -31,7 +31,7 @@ public class DestructibleItemBase : MonoBehaviour
         DropCoins();
     }
 
-    [NaughtyAttributes.Button]
+   // [NaughtyAttributes.Button]
     private void DropCoins()
     {
         var i = Instantiate(coinPrefab, dropPosition.position, Quaternion.identity);
@@ -49,7 +49,7 @@ public class DestructibleItemBase : MonoBehaviour
         i.transform.DOMove(randomTarget, 0.5f).SetEase(Ease.OutQuad);
     }
 
-    [NaughtyAttributes.Button]
+    //[NaughtyAttributes.Button]
     private void DropGroupOfCoins()
     {
         StartCoroutine(DropGroupOfCoinsCorroutine());

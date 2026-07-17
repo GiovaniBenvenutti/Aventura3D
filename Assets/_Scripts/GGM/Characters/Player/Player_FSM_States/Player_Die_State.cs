@@ -38,7 +38,7 @@ public class Player_Die_State : PlayerBaseState
        // Debug.Log("Stay in State: DIE");
 
         // impede qualquer movimento
-        spc.characterController.Move(Vector3.zero);
+      //  spc.characterController.Move(Vector3.zero);   
 
     }
 

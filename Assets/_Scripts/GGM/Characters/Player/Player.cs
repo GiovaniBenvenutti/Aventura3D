@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GGM.Singleton;
-using NaughtyAttributes;
+//using NaughtyAttributes;
 using GGM.Cloth;
 
 public class Player : Singleton<Player>
@@ -19,29 +19,29 @@ public class Player : Singleton<Player>
     public FSM_Player fsmPlayer;
 
 
-    [Foldout("Moviment Setup")] public float speed = 1f;
-    [Foldout("Moviment Setup")] public float turnSpeed = 1f;
+    [Header("Moviment Setup")] public float speed = 1f;
+    [Header("Moviment Setup")] public float turnSpeed = 1f;
 
-    [Foldout("Animator Setup")] public AnimatorManager animatorManager;
+    [Header("Animator Setup")] public AnimatorManager animatorManager;
 
-    [Foldout("Jump Setup")] public float jumpForce = 20.0f;
-    [Foldout("Jump Setup")] public bool isGrounded;
-    [Foldout("Jump Setup")] public KeyCode jumpKey = KeyCode.Space;
-    [Foldout("Jump Setup")] public float gravity = 20f;
-    [Foldout("Jump Setup")] public float _vSpeed = 0f;
+    [Header("Jump Setup")] public float jumpForce = 20.0f;
+    [Header("Jump Setup")] public bool isGrounded;
+    [Header("Jump Setup")] public KeyCode jumpKey = KeyCode.Space;
+    [Header("Jump Setup")] public float gravity = 20f;
+    [Header("Jump Setup")] public float _vSpeed = 0f;
     //[Foldout("Jump Setup")] public bool isJumping = false;
 
-    [Foldout("Run Setup")] public KeyCode runKey = KeyCode.LeftShift;
-    [Foldout("Run Setup")] public float speedRun = 1.5f;
-    [Foldout("Run Setup")] public Vector3 speedVector;
+    [Header("Run Setup")] public KeyCode runKey = KeyCode.LeftShift;
+    [Header("Run Setup")] public float speedRun = 1.5f;
+    [Header("Run Setup")] public Vector3 speedVector;
 
-    [Foldout("FlashColor Setup")] public List<FlashColor3D> flashColors;
+    [Header("FlashColor Setup")] public List<FlashColor3D> flashColors;
 
-    [Foldout("LIfe Setup")] public bool isDead = false;
-    [Foldout("LIfe Setup")] public HealthBase health;
-    [Foldout("LIfe Setup")] public float damageCooldown = 1f; // intervalo em segundos
-    [Foldout("LIfe Setup")] public Vector3 respawnOffSet = new Vector3(1,5,1);
-    [Foldout("LIfe Setup")] public ScreenShake shake;
+    [Header("LIfe Setup")] public bool isDead = false;
+    [Header("LIfe Setup")] public HealthBase health;
+    [Header("LIfe Setup")] public float damageCooldown = 1f; // intervalo em segundos
+    [Header("LIfe Setup")] public Vector3 respawnOffSet = new Vector3(1,5,1);
+    [Header("LIfe Setup")] public ScreenShake shake;
 
     [Space]
     [SerializeField] private ClothChanger _clothChanger;
@@ -198,7 +198,6 @@ public class Player : Singleton<Player>
         }
     }
 
-    [NaughtyAttributes.Button]
     public void Respawn()
     {
         if(CheckPointManager.Instance.hasCheckPoint())

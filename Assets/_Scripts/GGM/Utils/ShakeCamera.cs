@@ -29,7 +29,7 @@ public class ShakeCamera : Singleton<ShakeCamera>
 
     #region Debug
 
-        [NaughtyAttributes.Button]
+        //[NaughtyAttributes.Button]
         public void ShakeTeste()
         {
             Shake(amplitude, frequecy, shakeTime);

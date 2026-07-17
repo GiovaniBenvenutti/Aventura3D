@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+//using NaughtyAttributes;
 using GGM.Singleton;
 using GGM.Item;
 
@@ -17,7 +17,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public int lastLevel;
 
-    public int currentCheckPoint;
+    public int currentCheckPoint = 1;
 
     public SaveSetup setup
     {
@@ -57,7 +57,7 @@ public class SaveManager : Singleton<SaveManager>
 
     #region Save
 
-    [NaughtyAttributes.Button("Save")]
+ //   [NaughtyAttributes.Button("Save")]
     private void Save()
     {
         string setupToJson = JsonUtility.ToJson(_saveSetup, true);
@@ -97,7 +97,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SaveNewCheckPointIndex(int newCheckPointIndex)
     {
-        this.currentCheckPoint = newCheckPointIndex;
+        currentCheckPoint = newCheckPointIndex;
         _saveSetup.lastCheckPointIndex = _saveSetup.newCheckPointIndex;
         _saveSetup.newCheckPointIndex = newCheckPointIndex;
         Debug.Log("save new check point index chamou o save");
@@ -126,7 +126,7 @@ public class SaveManager : Singleton<SaveManager>
 
     #region Load
 
-    [NaughtyAttributes.Button("Load")]
+ //   [NaughtyAttributes.Button("Load")]
     private void Load()
     {
         string fileLoaded = "";
@@ -158,10 +158,10 @@ public class SaveManager : Singleton<SaveManager>
     public int GetLastCheckPoint()
     {
         Load();
-        this.currentCheckPoint = _saveSetup.newCheckPointIndex;
+        currentCheckPoint = _saveSetup.newCheckPointIndex;
         Debug.Log("save manager.getLastCheckPoint diz new checkpoint = " + _saveSetup.newCheckPointIndex.ToString()); // mudei pra new check point pra testar
         //return _saveSetup.newCheckPointIndex;
-        return  this.currentCheckPoint;
+        return  currentCheckPoint;
     }
 
 

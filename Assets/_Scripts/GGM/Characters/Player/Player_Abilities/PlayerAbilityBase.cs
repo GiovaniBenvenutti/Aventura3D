@@ -10,7 +10,7 @@ public class PlayerAbilityBase : MonoBehaviour
 
     protected Inputs inputs;
 
-    private void OnValidate()
+    private void Awake()
     {
         if (player == null) player = GetComponent<Player>();
     }
@@ -20,24 +20,23 @@ public class PlayerAbilityBase : MonoBehaviour
         inputs = new Inputs();
         inputs.Enable();
 
-        Init();
-        OnValidate();
-        RegisterListeners();        
+       // Init();
+        //RegisterListeners();        
     }
 
     private void OnEnable()
     {
-        if (inputs != null) inputs.Enable();
+        inputs?.Enable();
     }
 
     private void OnDisable()
     {
-        inputs.Disable();
+        inputs?.Disable();
     }
 
     private void OnDestroy()
     {
-        RemoveListeners();
+       // RemoveListeners();
     }
 
     protected virtual void Init()

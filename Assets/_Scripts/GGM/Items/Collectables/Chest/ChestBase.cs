@@ -37,7 +37,7 @@ public class ChestBase : MonoBehaviour
         }
     }
 
-    [NaughtyAttributes.Button]
+    //[NaughtyAttributes.Button]
     private void OpenChest()
     {
         if (_opennedChest) return;
@@ -67,7 +67,7 @@ public class ChestBase : MonoBehaviour
         }
     }
 
-    [NaughtyAttributes.Button]
+   // [NaughtyAttributes.Button]
     private void ShowNotification()
     {
         if (_opennedChest) return;
@@ -86,7 +86,7 @@ public class ChestBase : MonoBehaviour
         }
     }
 
-    [NaughtyAttributes.Button]
+  //  [NaughtyAttributes.Button]
     private void HideNotification()
     {
         notification.SetActive(false);

@@ -36,7 +36,7 @@ public class BossHealth : MonoBehaviour, IDamageable
         OnKill?.Invoke(this);
     }
 
-    [NaughtyAttributes.Button]
+    //[NaughtyAttributes.Button]
     public void Damage()
     {
         Damage(5f);

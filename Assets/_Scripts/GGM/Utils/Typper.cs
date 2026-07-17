@@ -23,7 +23,7 @@ public class Typper : MonoBehaviour
         textMesh.text = ""; // Limpa o texto no início    
     }
 
-    [NaughtyAttributes.Button("Start Typing")]
+    //[NaughtyAttributes.Button("Start Typing")]
     public void StartTyping()
     {
         StartCoroutine(type(textToType));

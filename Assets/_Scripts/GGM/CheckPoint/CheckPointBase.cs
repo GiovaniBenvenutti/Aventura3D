@@ -53,7 +53,7 @@ public class CheckPointBase : MonoBehaviour
 
     }
 
-    [NaughtyAttributes.Button]
+   // [NaughtyAttributes.Button]
     private void TurnItOn()
     {
         checkPointActive = true;
@@ -65,7 +65,7 @@ public class CheckPointBase : MonoBehaviour
         }
     }
 
-    [NaughtyAttributes.Button]
+    //[NaughtyAttributes.Button]
     private void TurnItOff()
     {
         checkPointActive = false;

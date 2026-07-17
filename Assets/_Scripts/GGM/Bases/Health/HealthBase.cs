@@ -45,7 +45,7 @@ public class HealthBase : MonoBehaviour, IDamageable
         Init();
     }
 
-    [NaughtyAttributes.Button]
+   // [NaughtyAttributes.Button]
     public void Damage()
     {
         Damage(1f);

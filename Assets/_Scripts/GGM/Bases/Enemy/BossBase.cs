@@ -212,7 +212,7 @@ namespace Boss
             while (attacks < attackAmount)
             {
                 attacks++;
-                transform.DOScale(1.2f, .1f).SetLoops(2, LoopType.Yoyo);
+              //  transform.DOScale(1.2f, .1f).SetLoops(2, LoopType.Yoyo);
                 Debug.Log("Attack");
                 yield return new WaitForSeconds(timeBtweenAttacks);
             }
@@ -261,10 +261,10 @@ namespace Boss
 
         #region Animation
 
-        [NaughtyAttributes.Button]
+     //   [NaughtyAttributes.Button]
         public void StartInitAnimation()
         {
-            transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
+           // transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
         }
 
         public void playAnimationByTrigger(AnimationType animationType)
@@ -280,19 +280,19 @@ namespace Boss
 
         #region Debug
 
-        [NaughtyAttributes.Button]
+      //  [NaughtyAttributes.Button]
         private void SwitchStateINIT()
         {
             SwitchState(BossAction.INIT);
         }
 
-        [NaughtyAttributes.Button]
+        //[NaughtyAttributes.Button]
         private void SwitchStateWALK()
         {
             SwitchState(BossAction.WALK);
         }
 
-        [NaughtyAttributes.Button]
+       // [NaughtyAttributes.Button]
         private void SwitchStateATTACK()
         {
             SwitchState(BossAction.ATTACK);
@@ -333,7 +333,7 @@ namespace Boss
             else
             {
                 // Se não tiver, usa DOTween normalmente
-                transform.DOMove(transform.position - direction, 0.2f);
+               // transform.DOMove(transform.position - direction, 0.2f);
             }
         }
 

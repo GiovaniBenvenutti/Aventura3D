@@ -33,7 +33,7 @@ public class ChestItemCoin : ChestItemBase
         //Collect();
     }
 
-    [NaughtyAttributes.Button]
+    //[NaughtyAttributes.Button]
     public override void Collect()
     {
         base.Collect();

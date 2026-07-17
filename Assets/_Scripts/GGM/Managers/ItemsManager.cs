@@ -70,13 +70,13 @@ namespace GGM.Item
 
         #region Debug
 
-        [NaughtyAttributes.Button]
+      //  [NaughtyAttributes.Button]
         private void addCoin()
         {
             AddByType(ItemType.COIN);
         }
 
-        [NaughtyAttributes.Button]
+     //   [NaughtyAttributes.Button]
         private void addLifePack()
         {
             AddByType(ItemType.LIFE_PACK);

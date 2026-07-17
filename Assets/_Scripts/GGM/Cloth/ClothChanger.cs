@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+//using NaughtyAttributes;
 
 namespace GGM.Cloth
 {
@@ -19,7 +19,7 @@ namespace GGM.Cloth
             _defaultTexture = ClothManager.Instance.GetClothByType(ClothType.ORIGINAL).text;
         }
 
-        [NaughtyAttributes.Button("Change Texture")]
+     //   [NaughtyAttributes.Button("Change Texture")]
         private void ChangeTexture()
         {
             foreach (var mesh in mesh)

@@ -39,7 +39,7 @@ public class EndGame1 : MonoBehaviour
         }
     }
 
-    [NaughtyAttributes.Button("Show End Game")]
+    //[NaughtyAttributes.Button("Show End Game")]
     private void ShowEndGame()
     {
         _isEndGame = true;

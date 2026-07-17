@@ -88,7 +88,7 @@ namespace Enemy
         #region Animation
         private void BornAnimation()
         {
-            transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
+           // transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
         }
 
         public void playAnimationByTrigger(AnimationType animationType)
@@ -131,7 +131,7 @@ namespace Enemy
             else
             {
                 // Se não tiver, usa DOTween normalmente
-                transform.DOMove(transform.position - direction, 0.2f);
+               // transform.DOMove(transform.position - direction, 0.2f);
             }
         }
 
