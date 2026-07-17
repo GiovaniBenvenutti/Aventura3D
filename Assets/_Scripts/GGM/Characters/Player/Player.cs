@@ -67,7 +67,7 @@ public class Player : Singleton<Player>
         if (shake == null) shake = GetComponent<ScreenShake>();
         playerStateManager = GetComponent<PlayerStateManager>();
         characterController = GetComponent<CharacterController>();
-        loadSceneHelper = FindObjectOfType<LoadSceneHelper>();
+        if (loadSceneHelper == null) loadSceneHelper = FindObjectOfType<LoadSceneHelper>();
 
         //_clothChanger = GetComponent<ClothChanger>();
 
@@ -206,6 +206,8 @@ public class Player : Singleton<Player>
          //   replace += respawnOffSet;
          //   transform.position = replace;
          //   playerStateManager.SwitchState(playerStateManager.idleState);
+            SaveManager.Instance.GetLastCheckPoint();
+
             loadSceneHelper.Load(0);    // manda devolta pro menu
         }
     }

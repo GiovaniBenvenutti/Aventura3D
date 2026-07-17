@@ -2,9 +2,9 @@
     "playerName": "Player1",
     "currentCloth": 0,
     "lastLevel": 1,
-    "lastCheckPointIndex": 1,
-    "newCheckPointIndex": 2,
-    "coins": 10.0,
-    "health": 1.0,
-    "airDrop": 0.0
+    "lastCheckPointIndex": 4,
+    "newCheckPointIndex": 4,
+    "coins": 98.0,
+    "health": 13.0,
+    "airDrop": 5.0
 }

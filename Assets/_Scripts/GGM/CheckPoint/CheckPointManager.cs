@@ -53,7 +53,7 @@ public class CheckPointManager : Singleton<CheckPointManager>
     {
         lastCheckPointKey = SaveManager.Instance.currentCheckPoint;
         CheckPointBase checkPoint = checkPoints.Find(cp => cp.key == lastCheckPointKey);
-        Debug.Log("checkpointmanager diz lastcheckpoint é " + lastCheckPointKey);
+        Debug.Log("checkpointmanager diz lastcheckpoint é " + lastCheckPointKey + " " + checkPoint.transform.position.ToString());
         return checkPoint.transform.position;
        // return checkPoint != null ? checkPoint.transform.position : Vector3.zero;
     }

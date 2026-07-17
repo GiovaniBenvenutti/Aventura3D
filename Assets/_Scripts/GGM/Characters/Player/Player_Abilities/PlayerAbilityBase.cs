@@ -13,30 +13,30 @@ public class PlayerAbilityBase : MonoBehaviour
     private void Awake()
     {
         if (player == null) player = GetComponent<Player>();
+        inputs = new Inputs();
+        inputs.Enable();
     }
 
     private void Start()
     {
-        inputs = new Inputs();
-        inputs.Enable();
 
-       // Init();
-        //RegisterListeners();        
+        Init();
+        RegisterListeners();        
     }
 
     private void OnEnable()
     {
-        inputs?.Enable();
+        inputs.Enable();
     }
 
     private void OnDisable()
     {
-        inputs?.Disable();
+        inputs.Disable();
     }
 
     private void OnDestroy()
     {
-       // RemoveListeners();
+        RemoveListeners();
     }
 
     protected virtual void Init()
