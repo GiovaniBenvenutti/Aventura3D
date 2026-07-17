@@ -1,5 +1,5 @@
 {
-    "playerName": "Player1",
+    "playerName": "alterei no trabalho pra verificar a sincronização",
     "healthValue": 16.0,
     "currentCloth": 0,
     "lastLevel": 1,
