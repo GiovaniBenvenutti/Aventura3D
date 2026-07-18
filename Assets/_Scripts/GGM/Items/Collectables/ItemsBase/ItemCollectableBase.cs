@@ -7,6 +7,7 @@ namespace GGM.Item
     
     public class ItemCollectableBase : MonoBehaviour
     {
+        public SfxType sfxType;
         public ItemType itemType;
         public string compareTag = "Player";
         public float timeToHide = 2f;
@@ -31,8 +32,14 @@ namespace GGM.Item
             }
         }
 
+        private void PlaySfx()
+        {
+            SfxPool.Instance.Play(sfxType);
+        }
+
         protected virtual void Collect() // o que acontece quando o item é coletado
         {
+            PlaySfx();
             ItemsManager.Instance.AddByType(itemType);
             
             if(collider != null) collider.enabled = false;
