@@ -1,11 +1,11 @@
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(FSM_exemple))]
-public class StateMachineEditor : Editor
+public class StateMachineEditor : UnityEditor.Editor
 {
     public bool showFoldout;
 
