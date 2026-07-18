@@ -52,6 +52,7 @@ public class EndGame1 : MonoBehaviour
        // CheckPointManager.Instance.ResetCheckPoint();
         SaveManager.Instance.SaveNewCheckPointIndex(1);
         SaveManager.Instance.SaveLastLevel(currentLevel + 1 );
+        
 
   //      Debug.Log("End Game"); 
         //endGameObjects.ForEach(obj => obj.SetActive(true));

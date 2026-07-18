@@ -29,6 +29,8 @@ namespace GGM.Cloth
         //public SkinnedMeshRenderer[] mesh;
         public Texture2D text;
         //public string shaderIdName = "_EmissionMap";
+
+       // public int clothId;
     }
 }
 

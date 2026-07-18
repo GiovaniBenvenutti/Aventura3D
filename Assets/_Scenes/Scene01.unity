@@ -4473,7 +4473,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.19851029, y: 0.49908197, z: -0.11863211, w: 0.8351272}
+  m_LocalRotation: {x: 0.19851027, y: 0.49908197, z: -0.1186321, w: 0.8351272}
   m_LocalPosition: {x: -202.13498, y: 43.1, z: -14.580677}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5079,7 +5079,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025874875}
-  m_LocalRotation: {x: 0.19851029, y: 0.49908197, z: -0.11863211, w: 0.8351272}
+  m_LocalRotation: {x: 0.19851027, y: 0.49908197, z: -0.1186321, w: 0.8351272}
   m_LocalPosition: {x: -204.3583, y: 40.94696, z: -12.749004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11973,7 +11973,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498045280}
-  m_LocalRotation: {x: 0.0728151, y: -0.5706556, z: 0.05089891, w: 0.8163698}
+  m_LocalRotation: {x: 0.07281511, y: -0.5706556, z: 0.05089893, w: 0.8163697}
   m_LocalPosition: {x: -177.49963, y: 35.746964, z: -11.517429}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -13157,7 +13157,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727798119}
-  m_LocalRotation: {x: 0.16313682, y: 0.000000008487938, z: -0.0000000014034971, w: 0.9866035}
+  m_LocalRotation: {x: 0.16313684, y: -0.000000008487938, z: 0.0000000014034972, w: 0.9866035}
   m_LocalPosition: {x: -192.12332, y: 50.94696, z: -56.168327}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -25895,12 +25895,16 @@ MonoBehaviour:
   clothSetups:
   - clothType: 0
     text: {fileID: 2800000, guid: 8d0f7b33a4f3bf5459574270675b2718, type: 3}
+    clothId: 0
   - clothType: 1
     text: {fileID: 2800000, guid: 08de92bc2b82cb342aede86a9a713045, type: 3}
+    clothId: 0
   - clothType: 2
     text: {fileID: 2800000, guid: 72c093e49f9d4ff4fbecb14de835be65, type: 3}
+    clothId: 0
   - clothType: 3
     text: {fileID: 2800000, guid: a741b487f0c570d4e94ef5285ce33062, type: 3}
+    clothId: 0
 --- !u!1 &7183099222809399355
 GameObject:
   m_ObjectHideFlags: 0

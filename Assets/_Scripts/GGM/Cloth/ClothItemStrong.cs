@@ -6,6 +6,8 @@ namespace GGM.Cloth
 {
     public class ClothItemStrong : ClothItemBase
     {
+        //public new int clothId = 2;
+
         public float damageMultiply = .5f;
         public override void Collect()
         {

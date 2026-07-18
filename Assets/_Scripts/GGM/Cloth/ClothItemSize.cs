@@ -6,6 +6,8 @@ namespace GGM.Cloth
 {
     public class ClothItemSize : ClothItemBase
     {
+      //  public new int clothId = 3;
+
         public float scaleMultiply = 2f;
         public override void Collect()
         {

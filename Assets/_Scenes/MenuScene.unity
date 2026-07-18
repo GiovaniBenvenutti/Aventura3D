@@ -1147,6 +1147,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ==  MANAGERS ==
       objectReference: {fileID: 0}
+    - target: {fileID: 7183099222030906174, guid: 6c0e15fa1e840c745afd0770e8bf2df8, type: 3}
+      propertyPath: clothSetups.Array.data[1].clothId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183099222030906174, guid: 6c0e15fa1e840c745afd0770e8bf2df8, type: 3}
+      propertyPath: clothSetups.Array.data[2].clothId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183099222030906174, guid: 6c0e15fa1e840c745afd0770e8bf2df8, type: 3}
+      propertyPath: clothSetups.Array.data[3].clothId
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c0e15fa1e840c745afd0770e8bf2df8, type: 3}
 --- !u!1 &1552058643

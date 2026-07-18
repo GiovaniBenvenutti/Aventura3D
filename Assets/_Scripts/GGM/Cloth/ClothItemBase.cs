@@ -6,6 +6,8 @@ namespace GGM.Cloth
 {
     public class ClothItemBase : MonoBehaviour
     {
+       // public int clothId;
+
         public ClothType clothType;
         public string compareTag = "Player";
 

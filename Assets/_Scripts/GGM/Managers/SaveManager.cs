@@ -6,6 +6,8 @@ using UnityEngine;
 //using NaughtyAttributes;
 using GGM.Singleton;
 using GGM.Item;
+using GGM.Cloth;
+
 
 public class SaveManager : Singleton<SaveManager>
 {
@@ -86,10 +88,10 @@ public class SaveManager : Singleton<SaveManager>
         Save();
     }
     
-    public void SavePlayerCloth(int currentCloth)
+    public void SavePlayerCloth(ClothType currentCloth)
     {
         _saveSetup.currentCloth = currentCloth;
-        Debug.Log("save player cloth chamou o save");
+        Debug.Log("save player cloth chamou o save cloth " + currentCloth.ToString());
         Save();
     }
 
@@ -190,7 +192,7 @@ public class SaveSetup
     public string playerName;
     public float healthValue;
 
-    public int currentCloth;
+    public ClothType currentCloth;
 
     public int lastLevel;
 

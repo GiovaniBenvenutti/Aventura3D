@@ -30,6 +30,8 @@ namespace GGM.Cloth
         }
         public void ChangeTexture(ClothSetup setup)
         {
+            SaveManager.Instance.SavePlayerCloth(setup.clothType);
+
             foreach (var mesh in mesh)
             {
                 mesh.sharedMaterials[0].SetTexture(shaderIdName, setup.text);
