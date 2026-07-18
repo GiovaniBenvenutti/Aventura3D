@@ -1,12 +1,12 @@
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using GGM.FSM;
+//using GGM.FSM;
 
 [CustomEditor(typeof(GameManager))]
-public class GameManagerEditor : Editor
+public class GameManagerEditor : UnityEditor.Editor
 {
     public bool showFoldout;
 

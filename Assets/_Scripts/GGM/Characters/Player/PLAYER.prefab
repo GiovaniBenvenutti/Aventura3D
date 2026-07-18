@@ -438,7 +438,7 @@ ParticleSystem:
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
-  useRigidbodyForVelocity: 1
+  useRigidbodyForVelocity: 0
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -5250,6 +5250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ffaca58809cdb45aae11d229232a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadSceneHelper: {fileID: 0}
   colliders:
   - {fileID: 3269349262874828955}
   - {fileID: 45918146}
@@ -5274,7 +5275,7 @@ MonoBehaviour:
   isDead: 0
   health: {fileID: 9118403613704531241}
   damageCooldown: 1
-  respawnOffSet: {x: 5, y: 2, z: -9}
+  respawnOffSet: {x: 5, y: 5, z: -9}
   shake: {fileID: 45918148}
   _clothChanger: {fileID: 8587910050795195028}
 --- !u!143 &3269349262874828955

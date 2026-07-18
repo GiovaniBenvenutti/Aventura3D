@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
-using GGM.Cloth;
+//using GGM.Cloth;
 
 public class HealthBase : MonoBehaviour, IDamageable
 {
     public Action<HealthBase> OnKill;
     public Action<HealthBase> OnDamage;
+
     public List<UiHealthUpdater> uiUpdaters;
     public bool isPlayer = false;
     public float startLife = 20f;
@@ -33,10 +34,10 @@ public class HealthBase : MonoBehaviour, IDamageable
         uiUpdaters = FindObjectsOfType<UiHealthUpdater>().ToList();
     }
 
-    // void Start()
-    // {
-    //     UpDateUI();
-    // }
+    void Start()
+    {
+        Init();
+    }
 
     private void Init()
     {

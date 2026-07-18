@@ -28,7 +28,7 @@ namespace Boss
     public class BossBase : MonoBehaviour, IDamageable
     {
         public LoadSceneHelper loadSceneHelper;
-        public new Collider collider;
+        public Collider collider;
 
         public CharacterController characterController;
 

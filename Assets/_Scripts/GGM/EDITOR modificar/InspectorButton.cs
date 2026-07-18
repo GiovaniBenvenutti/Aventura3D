@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+
 [CustomEditor(typeof(RandonObject))]
 
-public class InspectorButton : Editor
+public class InspectorButton : UnityEditor.Editor
 {
-    
-
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();

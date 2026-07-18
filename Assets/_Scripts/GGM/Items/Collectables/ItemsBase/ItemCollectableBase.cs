@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 
 namespace GGM.Item
@@ -13,10 +13,10 @@ namespace GGM.Item
         public float timeToHide = 2f;
         public GameObject graficItem;
 
-        public new Collider collider;
+        public Collider collider;
 
         [Header("FX")]
-        public new ParticleSystem particleSystem;
+        public ParticleSystem particleSystem;
         public AudioSource audioSource;
 
         private void Awake() 
